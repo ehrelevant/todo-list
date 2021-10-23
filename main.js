@@ -1,0 +1,1 @@
+(()=>{const o=(o,t,e,d,i)=>{const r={title:o,description:t,dueDate:e,priority:d,isDone:i,setPriority:o=>{r.priority=o},switchDone:()=>{r.isDone=!r.isDone}};return r};todo1=o("a","a","date",1,!1),todo2=o("b","b","date",2,!0),todo3=o("c","c","date",3,!1),proj1=(()=>{let o=[];return{addToDo:t=>{o.push(t)},getToDos:()=>o}})(),proj1.addToDo([todo1,todo2,todo3])})();
