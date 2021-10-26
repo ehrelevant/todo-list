@@ -24,7 +24,6 @@ div, section {
 .todo {
     width: auto;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 4fr 1fr 2fr 1fr 1fr;
 }
