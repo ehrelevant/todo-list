@@ -32,6 +32,10 @@ div, section {
     text-align: center;
 }
 
-.todo .task-name {
+.task-name {
     text-align: left;
+}
+
+.todo-desc {
+    grid-column: 1/6;
 }
