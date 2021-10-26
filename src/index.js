@@ -36,6 +36,47 @@ const Display = (() => {
     };
 })();
 
+const ElementBuilder = (() => {
+    function buildTodo(toDoObj) {
+        const container = document.createElement('div');
+
+        const title = document.createElement('p');
+        title.textContent = toDoObj.title;
+        title.classList.add('todo-desc', 'hidden')
+
+        const descBtn = document.createElement('btn');
+
+        const dueDate = document.createElement('p');
+        dueDate.textContent = toDoObj.dueDate;
+
+        const priority = document.createElement('p');
+        priority.textContent = toDoObj.priority;
+
+        const isDone = document.createElement('p');
+        isDone.textContent = toDoObj.isDone;
+
+        const desc = document.createElement(p);
+        desc.textContent = toDoObj.description;
+
+
+        container.appendChild(title);
+        container.appendChild(descBtn);
+        container.appendChild(dueDate);
+        container.appendChild(priority);
+        container.appendChild(isDone);
+
+        container.appendChild(desc);
+        return container;
+    };
+
+    function buildProject(projectObj) {
+
+    };
+
+    return {
+        buildTodo, buildProject
+    }
+})();
 
 todo1 = ToDo('a', 'a', 'date', 1, false)
 todo2 = ToDo('b', 'b', 'date', 2, true)
