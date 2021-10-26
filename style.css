@@ -27,3 +27,11 @@ div, section {
     display: grid;
     grid-template-columns: 4fr 1fr 2fr 1fr 1fr;
 }
+
+.todo p {
+    text-align: center;
+}
+
+.todo .task-name {
+    text-align: left;
+}
