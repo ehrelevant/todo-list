@@ -31,16 +31,22 @@ const Project = () => {
 };
 
 const Display = (() => {
-    function showTodo(todo) {
-        const todoList = document.querySelector('#todos_list');
+    const todoList = document.querySelector('#todos_list');
+
+    function _displayTodo(todo) {
         const todoObj = ElementBuilder.buildTodo(todo);
         todoList.appendChild(todoObj);
     }
-    function renderProject(proj) {
 
+    function renderProject(proj) {
+        todoList.textContent = '';
+        proj.getTodos().forEach(todo => {
+            _displayTodo(todo)
+        });
     }
+
     return {
-        showTodo
+        renderProject
     };
 })();
 
@@ -72,8 +78,7 @@ const ElementBuilder = (() => {
 
 
         descBtn.addEventListener('click', () => {
-            console.log('test')
-            desc.classList.toggle('hidden')
+            desc.classList.toggle('hidden');
         });
 
         container.appendChild(title);
@@ -100,8 +105,16 @@ todo1 = Todo('a', 'a', 1, false, 'Lorem ipsum dolor sit, amet consectetur adipis
 todo2 = Todo('b', 'b', 2, true, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
 todo3 = Todo('c', 'c', 3, false, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
 proj1 = Project()
-proj1.addTodo([todo1, todo2, todo3])
+proj1.addTodo(todo1)
+proj1.addTodo(todo2)
+proj1.addTodo(todo3)
 
-Display.showTodo(todo1);
-Display.showTodo(todo2);
-Display.showTodo(todo3);
+todo4 = Todo('d', 'd', 4, true, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
+todo5 = Todo('e', 'e', 5, true, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
+todo6 = Todo('f', 'f', 6, false, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
+proj2 = Project()
+proj2.addTodo(todo4)
+proj2.addTodo(todo5)
+proj2.addTodo(todo6)
+
+Display.renderProject(proj1);
