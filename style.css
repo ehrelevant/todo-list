@@ -16,7 +16,7 @@ div, section {
     grid-template-columns: 1fr 3fr;
 }
 
-.projects-panel, .todos-panel, .todos-list{
+.projects-panel, .todos-panel, .todos-list, .proj-list{
     display: flex;
     flex-direction: column;
 }
