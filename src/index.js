@@ -1,5 +1,5 @@
 
-const ToDo = (title, description, dueDate, priority, isDone) => {
+const Todo = (title, description, dueDate, priority, isDone) => {
     const setPriority = (priority) => {
         rets.priority = priority
     }
@@ -17,16 +17,16 @@ const ToDo = (title, description, dueDate, priority, isDone) => {
 };
 
 const Project = () => {
-    let _toDos = [];
+    let _todos = [];
 
-    const addToDo = toDo => {
-        _toDos.push(toDo);
+    const addTodo = todo => {
+        _todos.push(todo);
     };
 
-    const getToDos = () => _toDos;
+    const getTodos = () => _todos;
 
     return {
-        addToDo, getToDos
+        addTodo, getTodos
     };
 };
 
@@ -37,26 +37,26 @@ const Display = (() => {
 })();
 
 const ElementBuilder = (() => {
-    function buildTodo(toDoObj) {
+    function buildTodo(todoObj) {
         const container = document.createElement('div');
 
         const title = document.createElement('p');
-        title.textContent = toDoObj.title;
+        title.textContent = todoObj.title;
         title.classList.add('todo-desc', 'hidden')
 
         const descBtn = document.createElement('btn');
 
         const dueDate = document.createElement('p');
-        dueDate.textContent = toDoObj.dueDate;
+        dueDate.textContent = todoObj.dueDate;
 
         const priority = document.createElement('p');
-        priority.textContent = toDoObj.priority;
+        priority.textContent = todoObj.priority;
 
         const isDone = document.createElement('p');
-        isDone.textContent = toDoObj.isDone;
+        isDone.textContent = todoObj.isDone;
 
         const desc = document.createElement(p);
-        desc.textContent = toDoObj.description;
+        desc.textContent = todoObj.description;
 
 
         container.appendChild(title);
@@ -78,8 +78,8 @@ const ElementBuilder = (() => {
     }
 })();
 
-todo1 = ToDo('a', 'a', 'date', 1, false)
-todo2 = ToDo('b', 'b', 'date', 2, true)
-todo3 = ToDo('c', 'c', 'date', 3, false)
+todo1 = Todo('a', 'a', 'date', 1, false)
+todo2 = Todo('b', 'b', 'date', 2, true)
+todo3 = Todo('c', 'c', 'date', 3, false)
 proj1 = Project()
-proj1.addToDo([todo1, todo2, todo3])
+proj1.addTodo([todo1, todo2, todo3])
