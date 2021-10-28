@@ -1,5 +1,5 @@
 
-const Todo = (title, description, dueDate, priority, isDone) => {
+const Todo = (title, dueDate, priority, isDone, description) => {
     const setPriority = (priority) => {
         rets.priority = priority
     }
@@ -9,7 +9,7 @@ const Todo = (title, description, dueDate, priority, isDone) => {
     }
 
     const rets = {
-        title, description, dueDate, priority, isDone,
+        title, dueDate, priority, isDone, description,
         setPriority,
         switchDone,
     };
@@ -35,6 +35,9 @@ const Display = (() => {
         const todoList = document.querySelector('#todos_list');
         const todoObj = ElementBuilder.buildTodo(todo);
         todoList.appendChild(todoObj);
+    }
+    function renderProject(proj) {
+
     }
     return {
         showTodo
@@ -93,9 +96,9 @@ const ElementBuilder = (() => {
     }
 })();
 
-todo1 = Todo('a', 'a', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 1, false)
-todo2 = Todo('b', 'b', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 2, true)
-todo3 = Todo('c', 'c', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 3, false)
+todo1 = Todo('a', 'a', 1, false, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
+todo2 = Todo('b', 'b', 2, true, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
+todo3 = Todo('c', 'c', 3, false, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
 proj1 = Project()
 proj1.addTodo([todo1, todo2, todo3])
 
