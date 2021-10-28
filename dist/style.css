@@ -32,7 +32,7 @@ div, section {
     text-align: center;
 }
 
-.task-name {
+.task-name, .todo-desc p {
     text-align: left;
 }
 
