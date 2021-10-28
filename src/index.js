@@ -68,6 +68,11 @@ const ElementBuilder = (() => {
         desc.appendChild(descText);
 
 
+        descBtn.addEventListener('click', () => {
+            console.log('test')
+            desc.classList.toggle('hidden')
+        });
+
         container.appendChild(title);
         container.appendChild(descBtn);
         container.appendChild(dueDate);
@@ -88,9 +93,9 @@ const ElementBuilder = (() => {
     }
 })();
 
-todo1 = Todo('a', 'a', 'date', 1, false, 'yes')
-todo2 = Todo('b', 'b', 'date', 2, true, 'uhh')
-todo3 = Todo('c', 'c', 'date', 3, false, 'story')
+todo1 = Todo('a', 'a', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 1, false)
+todo2 = Todo('b', 'b', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 2, true)
+todo3 = Todo('c', 'c', 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 3, false)
 proj1 = Project()
 proj1.addTodo([todo1, todo2, todo3])
 
