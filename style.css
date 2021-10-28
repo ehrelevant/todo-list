@@ -39,3 +39,9 @@ div, section {
 .todo-desc {
     grid-column: 1/6;
 }
+
+
+
+.hidden {
+    display: none;
+}
