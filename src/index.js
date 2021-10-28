@@ -31,32 +31,41 @@ const Project = () => {
 };
 
 const Display = (() => {
+    function showTodo(todo) {
+        const todoList = document.querySelector('#todos_list');
+        const todoObj = ElementBuilder.buildTodo(todo);
+        todoList.appendChild(todoObj);
+    }
     return {
-
+        showTodo
     };
 })();
 
 const ElementBuilder = (() => {
-    function buildTodo(todoObj) {
+    function buildTodo(todo) {
         const container = document.createElement('div');
+        container.classList.add('todo')
 
         const title = document.createElement('p');
-        title.textContent = todoObj.title;
-        title.classList.add('todo-desc', 'hidden')
+        title.textContent = todo.title;
 
-        const descBtn = document.createElement('btn');
+        const descBtn = document.createElement('button');
+        descBtn.textContent = 'Read More';
 
         const dueDate = document.createElement('p');
-        dueDate.textContent = todoObj.dueDate;
+        dueDate.textContent = todo.dueDate;
 
         const priority = document.createElement('p');
-        priority.textContent = todoObj.priority;
+        priority.textContent = todo.priority;
 
         const isDone = document.createElement('p');
-        isDone.textContent = todoObj.isDone;
+        isDone.textContent = todo.isDone;
 
-        const desc = document.createElement(p);
-        desc.textContent = todoObj.description;
+        const desc = document.createElement('div');
+        desc.classList.add('todo-desc', 'hidden');
+        const descText = document.createElement('p');
+        descText.textContent = todo.description;
+        desc.appendChild(descText);
 
 
         container.appendChild(title);
@@ -66,6 +75,7 @@ const ElementBuilder = (() => {
         container.appendChild(isDone);
 
         container.appendChild(desc);
+
         return container;
     };
 
@@ -78,8 +88,12 @@ const ElementBuilder = (() => {
     }
 })();
 
-todo1 = Todo('a', 'a', 'date', 1, false)
-todo2 = Todo('b', 'b', 'date', 2, true)
-todo3 = Todo('c', 'c', 'date', 3, false)
+todo1 = Todo('a', 'a', 'date', 1, false, 'yes')
+todo2 = Todo('b', 'b', 'date', 2, true, 'uhh')
+todo3 = Todo('c', 'c', 'date', 3, false, 'story')
 proj1 = Project()
 proj1.addTodo([todo1, todo2, todo3])
+
+Display.showTodo(todo1);
+Display.showTodo(todo2);
+Display.showTodo(todo3);
