@@ -92,12 +92,8 @@ const ElementBuilder = (() => {
         return container;
     };
 
-    function buildProject(projectObj) {
-
-    };
-
     return {
-        buildTodo, buildProject
+        buildTodo
     }
 })();
 
