@@ -70,6 +70,9 @@ const ElementBuilder = (() => {
         const isDone = document.createElement('p');
         isDone.textContent = todo.isDone;
 
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Edit';
+
         const desc = document.createElement('div');
         desc.classList.add('todo-desc', 'hidden');
         const descText = document.createElement('p');
@@ -86,6 +89,7 @@ const ElementBuilder = (() => {
         container.appendChild(dueDate);
         container.appendChild(priority);
         container.appendChild(isDone);
+        container.appendChild(editBtn);
 
         container.appendChild(desc);
 
