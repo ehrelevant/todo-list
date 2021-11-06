@@ -81,7 +81,7 @@ const ElementBuilder = (() => {
 
         const isDone = document.createElement('input');
         isDone.type = 'checkbox';
-        isDone.value = todo.isDone;
+        isDone.checked = todo.isDone;
 
         const descBtn = document.createElement('button');
         descBtn.textContent = 'Expand';
