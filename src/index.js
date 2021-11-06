@@ -32,6 +32,29 @@ const Project = () => {
     };
 };
 
+
+const MainController = (() => {
+    function newTodo_raw(proj) {
+        todoList = proj.getTodos();
+
+        const title = prompt('Task Title');
+        const dueDate = prompt('Due Date');
+        const priority = todoList.length;
+        const isDone = (prompt('Is it done yet?') === 'true');
+
+        const desc = prompt('Description');
+
+        const todo = Todo(title, dueDate, priority, isDone, desc);
+        proj.addTodo(todo);
+        Display.renderProject(proj);
+    }
+
+    return {
+        newTodo_raw,
+    };
+})();
+
+
 const Display = (() => {
     const projList = document.querySelector('#project_list');
     const todoList = document.querySelector('#todos_list');
@@ -153,3 +176,8 @@ proj2.addTodo(todo6)
 projs.push(proj2)
 
 Display.renderProject(projs[0]);
+
+
+const todoButton = document.querySelector('#new_todo');
+todoButton.addEventListener('click', () => MainController.newTodo_raw(projs[0]))
+// "projs[0]"" should be removed in the future
