@@ -117,9 +117,6 @@ const ElementBuilder = (() => {
         const descBtn = document.createElement('button');
         descBtn.textContent = 'Expand';
 
-        const editBtn = document.createElement('button');
-        editBtn.textContent = 'Edit';
-
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete';
 
@@ -139,7 +136,6 @@ const ElementBuilder = (() => {
         container.appendChild(priority);
         container.appendChild(isDone);
         container.appendChild(descBtn);
-        container.appendChild(editBtn);
         container.appendChild(deleteBtn);
 
         container.appendChild(desc);
@@ -157,6 +153,7 @@ const ElementBuilder = (() => {
             Display.renderTodos(proj);
         });
         projBtn.textContent = proj.title;
+        projBtn.classList.add('proj-btn')
 
         container.appendChild(projBtn)
 
