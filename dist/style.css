@@ -54,6 +54,22 @@ div, section {
 
 
 
-.hidden {
+.new-todo-btn.form-open, .new-proj-btn.form-open {
     display: none;
+}
+
+.todo-form-container {
+    display: none;
+}
+
+.todo-form-container.form-open {
+    display: block;
+}
+
+.proj-form-container {
+    display: none;
+}
+
+.proj-form-container.form-open {
+    display: block;
 }

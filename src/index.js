@@ -175,3 +175,5 @@ todoBtn.addEventListener('click', () => MainController.newTodo_raw(selectedProj)
 const projBtn = document.querySelector('#new_project');
 projBtn.addEventListener('click', MainController.newProject_raw);
 
+const projForm = document.forms['projForm'];
+const todoForm = document.forms['todoForm'];
