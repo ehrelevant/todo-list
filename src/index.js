@@ -148,8 +148,8 @@ const ElementBuilder = (() => {
     };
 
     function buildProject(proj) {
-        // const container = document.createElement('div');
-        // container.classList.add('proj');
+        const container = document.createElement('div');
+        container.classList.add('proj');
 
         const projBtn = document.createElement('button');
         projBtn.addEventListener('click', () => {
@@ -158,10 +158,9 @@ const ElementBuilder = (() => {
         });
         projBtn.textContent = proj.title;
 
-        //container.appendChild(projBtn)
+        container.appendChild(projBtn)
 
-        //return container;
-        return projBtn;
+        return container;
     }
 
     return {

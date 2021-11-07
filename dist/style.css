@@ -28,6 +28,11 @@ div, section {
     flex-direction: column;
 }
 
+.proj {
+    display: flex;
+    flex-direction: row;
+}
+
 .todo {
     width: auto;
 
