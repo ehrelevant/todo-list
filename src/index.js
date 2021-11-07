@@ -39,7 +39,7 @@ const MainController = (() => {
 
         const title = prompt('Task Title');
         const dueDate = prompt('Due Date');
-        const priority = todoList.length;
+        const priority = todoList.length + 1;
         const isDone = (prompt('Is it done yet?') === 'true');
 
         const desc = prompt('Description');
