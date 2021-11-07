@@ -146,7 +146,7 @@ const ElementBuilder = (() => {
         descText.textContent = todo.description;
         desc.appendChild(descText);
 
-
+        isDone.addEventListener('change', todo.switchDone);
         descBtn.addEventListener('click', () => {
             desc.classList.toggle('hidden');
         });
