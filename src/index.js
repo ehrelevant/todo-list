@@ -1,5 +1,6 @@
 
 let projs = [];
+let selectedProj;
 
 const Todo = (title, dueDate, priority, isDone, description) => {
     const setPriority = (priority) => {
@@ -18,7 +19,7 @@ const Todo = (title, dueDate, priority, isDone, description) => {
     return rets;
 };
 
-const Project = () => {
+const Project = (title) => {
     let _todos = [];
 
     const addTodo = todo => {
@@ -28,7 +29,7 @@ const Project = () => {
     const getTodos = () => _todos;
 
     return {
-        addTodo, getTodos
+        addTodo, getTodos, title
     };
 };
 
@@ -49,8 +50,15 @@ const MainController = (() => {
         Display.renderProject(proj);
     }
 
+    function newProject_raw() {
+        const proj = Project();
+        proj.title = prompt('Project Title');
+        projs.push(proj);
+        Display.renderProjectList();
+    }
+
     return {
-        newTodo_raw,
+        newTodo_raw, newProject_raw
     };
 })();
 
@@ -140,15 +148,20 @@ const ElementBuilder = (() => {
     };
 
     function buildProject(proj) {
-        const container = document.createElement('div');
-        container.classList.add('proj');
+        // const container = document.createElement('div');
+        // container.classList.add('proj');
 
         const projBtn = document.createElement('button');
-        projBtn.addEventListener('click', Display.renderProject(proj));
+        projBtn.addEventListener('click', () => {
+            selectedProj = proj;
+            Display.renderProject(proj);
+        });
+        projBtn.textContent = proj.title;
 
-        container.appendChild(projBtn)
+        //container.appendChild(projBtn)
 
-        return container;
+        //return container;
+        return projBtn;
     }
 
     return {
@@ -157,6 +170,7 @@ const ElementBuilder = (() => {
 })();
 
 
+/*
 todo1 = Todo('a', 'a', 1, false, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
 todo2 = Todo('b', 'b', 2, true, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
 todo3 = Todo('c', 'c', 3, false, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
@@ -176,8 +190,12 @@ proj2.addTodo(todo6)
 projs.push(proj2)
 
 Display.renderProject(projs[0]);
+*/
 
-
-const todoButton = document.querySelector('#new_todo');
-todoButton.addEventListener('click', () => MainController.newTodo_raw(projs[0]))
+const todoBtn = document.querySelector('#new_todo');
+todoBtn.addEventListener('click', () => MainController.newTodo_raw(selectedProj));
 // "projs[0]"" should be removed in the future
+
+const projBtn = document.querySelector('#new_project');
+projBtn.addEventListener('click', MainController.newProject_raw);
+
