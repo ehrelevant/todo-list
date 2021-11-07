@@ -47,14 +47,14 @@ const MainController = (() => {
 
         const todo = Todo(title, dueDate, priority, isDone, desc);
         proj.addTodo(todo);
-        Display.renderProject(proj);
+        Display.renderTodos(proj);
     }
 
     function newProject_raw() {
         const proj = Project();
         proj.title = prompt('Project Title');
         projs.push(proj);
-        Display.renderProjectList();
+        Display.renderProjects();
     }
 
     return {
@@ -72,7 +72,7 @@ const Display = (() => {
         todoList.appendChild(todoObj);
     }
 
-    function renderProject(proj) {
+    function renderTodos(proj) {
         todoList.textContent = '';
         proj.getTodos().forEach(todo => {
             _displayTodo(todo)
@@ -84,7 +84,7 @@ const Display = (() => {
         projList.appendChild(projObj);
     }
 
-    function renderProjectList() {
+    function renderProjects() {
         projList.textContent = '';
         projs.forEach(proj => {
             _displayProjects(proj)
@@ -92,7 +92,7 @@ const Display = (() => {
     }
 
     return {
-        renderProject, renderProjectList
+        renderProjects, renderTodos
     };
 })();
 
@@ -154,7 +154,7 @@ const ElementBuilder = (() => {
         const projBtn = document.createElement('button');
         projBtn.addEventListener('click', () => {
             selectedProj = proj;
-            Display.renderProject(proj);
+            Display.renderTodos(proj);
         });
         projBtn.textContent = proj.title;
 
@@ -170,31 +170,8 @@ const ElementBuilder = (() => {
 })();
 
 
-/*
-todo1 = Todo('a', 'a', 1, false, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
-todo2 = Todo('b', 'b', 2, true, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
-todo3 = Todo('c', 'c', 3, false, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
-proj1 = Project()
-proj1.addTodo(todo1)
-proj1.addTodo(todo2)
-proj1.addTodo(todo3)
-projs.push(proj1)
-
-todo4 = Todo('d', 'd', 4, true, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
-todo5 = Todo('e', 'e', 5, true, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
-todo6 = Todo('f', 'f', 6, false, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.')
-proj2 = Project()
-proj2.addTodo(todo4)
-proj2.addTodo(todo5)
-proj2.addTodo(todo6)
-projs.push(proj2)
-
-Display.renderProject(projs[0]);
-*/
-
 const todoBtn = document.querySelector('#new_todo');
 todoBtn.addEventListener('click', () => MainController.newTodo_raw(selectedProj));
-// "projs[0]"" should be removed in the future
 
 const projBtn = document.querySelector('#new_project');
 projBtn.addEventListener('click', MainController.newProject_raw);
