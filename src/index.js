@@ -143,7 +143,8 @@ const ElementBuilder = (() => {
         const desc = document.createElement('div');
         desc.classList.add('todo-desc', 'hidden');
         const descText = document.createElement('p');
-        descText.textContent = todo.description;
+        descText.textContent = (todo.description) ? todo.description : 'No Description...';
+
         desc.appendChild(descText);
 
         isDone.addEventListener('change', todo.switchDone);
