@@ -57,6 +57,15 @@ const MainController = (() => {
         Display.renderProjects();
     }
 
+    function newTodo(proj, title, date, isDone, desc) {
+        todoList = proj.getTodos();
+        const priority = todoList.length + 1;
+        const todo = Todo(title, date, priority, isDone, desc);
+
+        proj.addTodo(todo);
+        Display.renderTodos(proj);
+    }
+
     function newProject(title) {
         const proj = Project();
         proj.title = title;
@@ -65,7 +74,7 @@ const MainController = (() => {
     }
 
     return {
-        newTodo_raw, newProject
+        newTodo, newProject
     };
 })();
 
@@ -201,6 +210,14 @@ todoForm.addEventListener('keydown', (e) => {
 todoForm.addEventListener('submit', () => {
     todoFormContainer.classList.remove('form-open');
     todoOpenBtn.classList.remove('form-open');
+
+    MainController.newTodo(selectedProj,
+                           todoForm['title'].value,
+                           todoForm['date'].value,
+                           todoForm['done'].checked,
+                           todoForm['desc'].value,
+                           );
+
     todoForm.reset();
 });
 
