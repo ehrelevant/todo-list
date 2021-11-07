@@ -34,11 +34,15 @@ div, section {
     flex-direction: row;
 }
 
+.proj-btn {
+    width: 100%;
+}
+
 .todo {
     width: auto;
 
     display: grid;
-    grid-template-columns: 8fr 4fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 8fr 4fr 1fr 1fr 1fr 1fr;
 }
 
 .todo p {
@@ -51,6 +55,10 @@ div, section {
 
 .todo-desc {
     grid-column: 1/8;
+}
+
+.hidden {
+    display: none;
 }
 
 
