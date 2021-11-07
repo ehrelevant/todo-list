@@ -170,11 +170,55 @@ const ElementBuilder = (() => {
 })();
 
 
-const todoBtn = document.querySelector('#new_todo');
-todoBtn.addEventListener('click', () => MainController.newTodo_raw(selectedProj));
+const todoFormContainer = document.querySelector('#todo_form_container');
+const todoForm = document.forms.todoForm;
+const todoOpenBtn = document.querySelector('#new_todo');
+todoOpenBtn.addEventListener('click', () => {
+    todoFormContainer.classList.add('form-open');
+    todoOpenBtn.classList.add('form-open');
+});
 
-const projBtn = document.querySelector('#new_project');
-projBtn.addEventListener('click', MainController.newProject_raw);
+todoForm.addEventListener('reset', () => {
+    todoFormContainer.classList.remove('form-open');
+    todoOpenBtn.classList.remove('form-open');
+});
 
-const projForm = document.forms['projForm'];
-const todoForm = document.forms['todoForm'];
+todoForm.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') {
+        todoFormContainer.classList.remove('form-open');
+        todoOpenBtn.classList.remove('form-open');
+        todoForm.reset();
+    }
+});
+
+todoForm.addEventListener('submit', () => {
+    todoFormContainer.classList.remove('form-open');
+    todoOpenBtn.classList.remove('form-open');
+    todoForm.reset();
+});
+
+
+
+const projFormContainer = document.querySelector('#proj_form_container');
+const projForm = document.forms.projForm;
+const projOpenBtn = document.querySelector('#new_project');
+projOpenBtn.addEventListener('click', () => {
+    projFormContainer.classList.add('form-open');
+    projOpenBtn.classList.add('form-open');
+});
+
+projForm.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') {
+        projFormContainer.classList.remove('form-open');
+        projOpenBtn.classList.remove('form-open');
+        projForm.reset();
+    }
+});
+
+projForm.addEventListener('submit', () => {
+    projFormContainer.classList.remove('form-open');
+    todoOpenBtn.classList.remove('form-open');
+    projForm.reset();
+});
+
+
