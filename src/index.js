@@ -57,8 +57,15 @@ const MainController = (() => {
         Display.renderProjects();
     }
 
+    function newProject(title) {
+        const proj = Project();
+        proj.title = title;
+        projs.push(proj);
+        Display.renderProjects();
+    }
+
     return {
-        newTodo_raw, newProject_raw
+        newTodo_raw, newProject
     };
 })();
 
@@ -217,7 +224,10 @@ projForm.addEventListener('keydown', (e) => {
 
 projForm.addEventListener('submit', () => {
     projFormContainer.classList.remove('form-open');
-    todoOpenBtn.classList.remove('form-open');
+    projOpenBtn.classList.remove('form-open');
+
+    MainController.newProject(projForm['title'].value);
+
     projForm.reset();
 });
 
