@@ -40,14 +40,13 @@
             <button id="new_todo" class="new-todo-btn">New Todo</button>
             <div id="todo_form_container" class="todo-form-container">
                 <form id="todo_form" name="todoForm" class="todo-form todo" onsubmit="return false">
+                    <input type="checkbox" name="done">
                     <input type="text" name="name" placeholder="Enter task name..." required>
                     <input type="date" name="date">
                     <input type="number" name="priority" required disabled>
-                    <input type="checkbox" name="done">
 
-                    <input type="reset" value="Reset" id="reset_todo_form_button">
-                    <input type="reset" value="Exit" id="exit_todo_form_button">
-                    <input type="submit"  value="Add" id="add_todo_form_button">
+                    <input type="reset" name="exit" value="Exit">
+                    <input type="submit" name="add" value="Add">
                     <textarea placeholder="Enter task description here..." id="todo_description" class="todo-desc"></textarea>
                 </form>
             </div>
