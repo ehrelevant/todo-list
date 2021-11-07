@@ -42,19 +42,27 @@ div, section {
     width: auto;
 
     display: grid;
-    grid-template-columns: 8fr 4fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 8fr 4fr 1fr 1fr 1fr;
 }
 
-.todo p {
+.checkbox {
+    justify-self: center;
+    width: 20px;
+}
+
+.todo-legend p, .todo-date, .todo-priority {
     text-align: center;
 }
 
-.task-name, .todo-desc p {
+.todo-title, .todo-desc p {
     text-align: left;
 }
 
 .todo-desc {
     grid-column: 1/8;
+    padding: 1%;
+    overflow-wrap: break-word;
+    width: 98%;
 }
 
 .hidden {

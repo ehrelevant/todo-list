@@ -101,18 +101,22 @@ const ElementBuilder = (() => {
         const container = document.createElement('div');
         container.classList.add('todo');
 
+        const isDone = document.createElement('input');
+        isDone.classList.add('checkbox')
+        isDone.type = 'checkbox';
+        isDone.checked = todo.isDone;
+
         const title = document.createElement('p');
+        title.classList.add('todo-title');
         title.textContent = todo.title;
 
         const dueDate = document.createElement('p');
+        dueDate.classList.add('todo-date');
         dueDate.textContent = todo.dueDate;
 
         const priority = document.createElement('p');
+        priority.classList.add('todo-priority');
         priority.textContent = todo.priority;
-
-        const isDone = document.createElement('input');
-        isDone.type = 'checkbox';
-        isDone.checked = todo.isDone;
 
         const descBtn = document.createElement('button');
         descBtn.textContent = 'Expand';
@@ -131,10 +135,10 @@ const ElementBuilder = (() => {
             desc.classList.toggle('hidden');
         });
 
+        container.appendChild(isDone);
         container.appendChild(title);
         container.appendChild(dueDate);
         container.appendChild(priority);
-        container.appendChild(isDone);
         container.appendChild(descBtn);
         container.appendChild(deleteBtn);
 
