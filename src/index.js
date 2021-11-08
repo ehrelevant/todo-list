@@ -69,6 +69,7 @@ const MainController = (() => {
     function newProject(title) {
         const proj = Project();
         proj.title = title;
+        selectedProj = proj;
         projs.push(proj);
         Display.renderProjects();
     }
@@ -250,3 +251,5 @@ projForm.addEventListener('submit', () => {
 });
 
 
+
+MainController.newProject('Default');

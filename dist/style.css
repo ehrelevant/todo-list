@@ -6,9 +6,7 @@ body {
     margin: 0;
     padding: 0;
 }
-textarea {
-    resize: none;
-}
+
 input {
     box-sizing: border-box;
     width: 100%;
@@ -63,6 +61,14 @@ div, section {
     padding: 1%;
     overflow-wrap: break-word;
     width: 98%;
+}
+
+.todo-form-textarea {
+    resize: vertical;
+    height: 12px;
+
+    grid-column: 1/8;
+    padding: 0.5%;
 }
 
 .hidden {
