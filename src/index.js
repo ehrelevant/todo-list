@@ -28,8 +28,20 @@ const Project = (title) => {
 
     const getTodos = () => _todos;
 
+    const _arrangePriority = () => {
+        _todos.reduce((i, todo) => {
+            todo.setPriority(i);
+            return i + 1;
+        }, 1);
+    };
+
+    const deleteTodo = (todo) => {
+        _todos.splice(_todos.indexOf(todo), 1);
+        _arrangePriority();
+    };
+
     return {
-        addTodo, getTodos, title
+        addTodo, getTodos, title, deleteTodo
     };
 };
 
@@ -140,6 +152,12 @@ const ElementBuilder = (() => {
 
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Delete';
+
+        deleteBtn.addEventListener('click', () => {
+            selectedProj.deleteTodo(todo);
+            Display.renderTodos(selectedProj);
+        });
+
 
         const desc = document.createElement('div');
         desc.classList.add('todo-desc', 'hidden');
