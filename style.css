@@ -1,20 +1,77 @@
 :root {
+    --main-color-1: #333;
+    --main-color-2: #222;
+    --secondary-color-1: #FFF;
+    --secondary-color-2: #111;
 
+    --hover-color-1: #333;
+
+    --button-color-1: #444;
+    --button-hover-color-1: #BBB;
+
+    --text-color-1: #FFF;
+    --text-color-2: #111;
+}
+
+
+body, button, input {
+    color: var(--text-color-1);
+    font-family: 'Courier New', Courier, monospace;
 }
 
 body {
     margin: 0;
     padding: 0;
+
+    background-color: var(--main-color-2);
+    font-size: 18px;
+}
+
+button, input{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input, textarea {
+    background-color: transparent;
+    outline: none;
+    border: none;
 }
 
 input {
     box-sizing: border-box;
     width: 100%;
+    border-left: 3px solid var(--main-color-2);
+    border-right: 3px solid var(--main-color-2);
+    border-bottom: 3px solid var(--secondary-color-1);
 }
 
-div, section {
-    border: 1px solid black;
+input:hover {
+    background-color: var(--main-color-1);
 }
+
+textarea {
+    background-color: var(--secondary-color-2);
+}
+
+
+div, section {
+    /* border: 1px solid black; */
+}
+
+button, input[type="submit"], input[type="reset"] {
+    background-color: var(--button-color-1);
+    outline: none;
+    border: none;
+
+    transition: 50ms ease-in-out;
+}
+
+button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: var(--button-hover-color-1);
+    color: var(--text-color-2);
+}
+
 
 .main {
     height: 100vh;
@@ -22,10 +79,19 @@ div, section {
     grid-template-columns: 1fr 4fr;
 }
 
-.projects-panel, .todos-panel, .todos-list, .proj-list{
+.projs-panel, .todos-panel, .todos-list, .proj-list{
     display: flex;
     flex-direction: column;
 }
+
+.projs-panel {
+    background-color: var(--main-color-1);
+}
+
+.todos-panel {
+    background-color: var(--main-color-2);
+}
+
 
 .proj {
     display: flex;
@@ -41,6 +107,12 @@ div, section {
 
     display: grid;
     grid-template-columns: 1fr 8fr 4fr 1fr 1fr 1fr;
+
+    transition: 50ms ease-in-out;
+}
+
+.todo:hover {
+    background-color: var(--hover-color-1);
 }
 
 .checkbox {
@@ -52,6 +124,11 @@ div, section {
     text-align: center;
 }
 
+.todo-legend {
+    font-weight: bold;
+    background-color: var(--secondary-color-2);
+}
+
 .todo-title, .todo-desc p {
     text-align: left;
 }
@@ -60,9 +137,11 @@ div, section {
     grid-column: 1/8;
     overflow-wrap: break-word;
     width: 100%;
-    
+
     display: flex;
     flex-direction: column;
+
+    background-color: var(--secondary-color-2);
 }
 
 .todo-desc-text {
@@ -80,6 +159,14 @@ div, section {
 .todo-edit-textarea {
     resize: vertical;
 }
+
+.todo-form {
+    width: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 8fr 4fr 1fr 1fr 1fr;
+}
+
 
 .hidden {
     display: none;
