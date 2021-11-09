@@ -135,17 +135,57 @@ const ElementBuilder = (() => {
         isDone.type = 'checkbox';
         isDone.checked = todo.isDone;
 
+
         const title = document.createElement('p');
         title.classList.add('todo-title');
         title.textContent = todo.title;
+
+        const titleInput = document.createElement('input');
+        titleInput.classList.add('hidden');
+        titleInput.type = 'text';
+        titleInput.value = todo.title;
+
+        title.addEventListener('dblclick', () => {
+            title.classList.add('hidden');
+            titleInput.classList.remove('hidden');
+            titleInput.focus();
+        });
+        titleInput.addEventListener('change', () => {
+            todo.title = titleInput.value;
+            title.textContent = titleInput.value;
+
+            title.classList.remove('hidden');
+            titleInput.classList.add('hidden');
+        });
+
 
         const dueDate = document.createElement('p');
         dueDate.classList.add('todo-date');
         dueDate.textContent = todo.dueDate;
 
+        const dueDateInput = document.createElement('input');
+        dueDateInput.classList.add('hidden');
+        dueDateInput.type = 'date';
+        dueDateInput.value = todo.dueDate;
+
+        dueDate.addEventListener('dblclick', () => {
+            dueDate.classList.add('hidden');
+            dueDateInput.classList.remove('hidden');
+            dueDateInput.focus();
+        });
+        dueDateInput.addEventListener('change', () => {
+            todo.dueDate = dueDateInput.value;
+            dueDate.textContent = dueDateInput.value;
+
+            dueDate.classList.remove('hidden');
+            dueDateInput.classList.add('hidden');
+        });
+
+
         const priority = document.createElement('p');
         priority.classList.add('todo-priority');
         priority.textContent = todo.priority;
+
 
         const descBtn = document.createElement('button');
         descBtn.textContent = 'Expand';
@@ -163,18 +203,57 @@ const ElementBuilder = (() => {
         desc.classList.add('todo-desc', 'hidden');
         const descText = document.createElement('p');
         descText.textContent = (todo.description) ? todo.description : 'No Description...';
+        descText.classList.add('todo-desc-text');
+
+        const descInput = document.createElement('textarea');
+        descInput.classList.add('hidden', 'todo-edit-textarea', 'todo-desc-text');
+        descInput.value = todo.description;
+
+        descText.addEventListener('dblclick', () => {
+            descText.classList.add('hidden');
+            descInput.classList.remove('hidden');
+            descInput.focus()
+        });
+        descInput.addEventListener('change', () => {
+            todo.description = descInput.value;
+            descText.textContent = descInput.value;
+
+            descText.classList.remove('hidden');
+            descInput.classList.add('hidden');
+        });
 
         desc.appendChild(descText);
+        desc.appendChild(descInput);
+
 
         isDone.addEventListener('change', todo.switchDone);
         descBtn.addEventListener('click', () => {
             desc.classList.toggle('hidden');
         });
 
+
+        container.addEventListener('focusout', () => {
+            title.classList.remove('hidden');
+            titleInput.classList.add('hidden');
+
+            dueDate.classList.remove('hidden');
+            dueDateInput.classList.add('hidden');
+
+            descText.classList.remove('hidden');
+            descInput.classList.add('hidden');
+        });
+
+
         container.appendChild(isDone);
+
         container.appendChild(title);
+        container.appendChild(titleInput);
+
         container.appendChild(dueDate);
+        container.appendChild(dueDateInput);
+
         container.appendChild(priority);
+
         container.appendChild(descBtn);
         container.appendChild(deleteBtn);
 
@@ -219,8 +298,8 @@ todoForm.addEventListener('reset', () => {
     todoOpenBtn.classList.remove('form-open');
 });
 
-todoForm.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') {
+todoForm.addEventListener('keydown', (evt) => {
+    if(evt.key === 'Escape') {
         todoFormContainer.classList.remove('form-open');
         todoOpenBtn.classList.remove('form-open');
         todoForm.reset();
