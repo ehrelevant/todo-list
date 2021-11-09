@@ -58,9 +58,15 @@ div, section {
 
 .todo-desc {
     grid-column: 1/8;
-    padding: 1%;
     overflow-wrap: break-word;
-    width: 98%;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-desc-text {
+    padding: 1%;
 }
 
 .todo-form-textarea {
@@ -69,6 +75,10 @@ div, section {
 
     grid-column: 1/8;
     padding: 0.5%;
+}
+
+.todo-edit-textarea {
+    resize: vertical;
 }
 
 .hidden {
