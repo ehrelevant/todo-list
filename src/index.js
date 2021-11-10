@@ -128,10 +128,11 @@ const Display = (() => {
 const ElementBuilder = (() => {
     function buildTodo(todo) {
         const container = document.createElement('div');
-        container.classList.add('todo');
+
+        const mainInfo = document.createElement('div');
+        mainInfo.classList.add('todo');
 
         const isDone = document.createElement('input');
-        isDone.classList.add('checkbox')
         isDone.type = 'checkbox';
         isDone.checked = todo.isDone;
 
@@ -244,19 +245,21 @@ const ElementBuilder = (() => {
         });
 
 
-        container.appendChild(isDone);
+        mainInfo.appendChild(isDone);
 
-        container.appendChild(title);
-        container.appendChild(titleInput);
+        mainInfo.appendChild(title);
+        mainInfo.appendChild(titleInput);
 
-        container.appendChild(dueDate);
-        container.appendChild(dueDateInput);
+        mainInfo.appendChild(dueDate);
+        mainInfo.appendChild(dueDateInput);
 
-        container.appendChild(priority);
+        mainInfo.appendChild(priority);
 
-        container.appendChild(descBtn);
-        container.appendChild(deleteBtn);
+        mainInfo.appendChild(descBtn);
+        mainInfo.appendChild(deleteBtn);
 
+
+        container.appendChild(mainInfo);
         container.appendChild(desc);
 
         return container;

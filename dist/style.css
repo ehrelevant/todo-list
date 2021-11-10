@@ -13,16 +13,18 @@
     --text-color-2: #111;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
 
-body, button, input {
+
+body, button, input, textarea {
     color: var(--text-color-1);
-    font-family: 'Courier New', Courier, monospace;
+    font-family:  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-
     background-color: var(--main-color-2);
     font-size: 18px;
 }
@@ -39,10 +41,7 @@ input, textarea {
 }
 
 input {
-    box-sizing: border-box;
     width: 100%;
-    border-left: 3px solid var(--main-color-2);
-    border-right: 3px solid var(--main-color-2);
     border-bottom: 3px solid var(--secondary-color-1);
 }
 
@@ -63,6 +62,7 @@ button, input[type="submit"], input[type="reset"] {
     background-color: var(--button-color-1);
     outline: none;
     border: none;
+    height: 40px;
 
     transition: 50ms ease-in-out;
 }
@@ -70,6 +70,12 @@ button, input[type="submit"], input[type="reset"] {
 button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
     background-color: var(--button-hover-color-1);
     color: var(--text-color-2);
+}
+
+input[type="checkbox"] {
+    justify-self: center;
+    width: 20px;
+    height: 20px;
 }
 
 
@@ -102,26 +108,26 @@ button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
     width: 100%;
 }
 
-.todo {
+.todo-legend p, .todo-date, .todo-priority {
+    text-align: center;
+}
+
+.todo, .todo-legend {
     width: auto;
 
     display: grid;
     grid-template-columns: 1fr 8fr 4fr 1fr 1fr 1fr;
+    column-gap: 10px;
+    align-items: center;
+    height: 50px;
+}
 
-    transition: 50ms ease-in-out;
+.todo {
+    transition: background-color 50ms ease-in-out;
 }
 
 .todo:hover {
     background-color: var(--hover-color-1);
-}
-
-.checkbox {
-    justify-self: center;
-    width: 20px;
-}
-
-.todo-legend p, .todo-date, .todo-priority {
-    text-align: center;
 }
 
 .todo-legend {
@@ -134,7 +140,6 @@ button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
 }
 
 .todo-desc {
-    grid-column: 1/8;
     overflow-wrap: break-word;
     width: 100%;
 
@@ -150,26 +155,23 @@ button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
 
 .todo-form-textarea {
     resize: vertical;
-    height: 12px;
+    min-height: 20px;
+    height: 20px;
 
-    grid-column: 1/8;
-    padding: 0.5%;
-}
-
-.todo-edit-textarea {
-    resize: vertical;
+    padding: 1%;
 }
 
 .todo-form {
     width: auto;
-
-    display: grid;
-    grid-template-columns: 1fr 8fr 4fr 1fr 1fr 1fr;
 }
 
 
 .hidden {
     display: none;
+}
+
+.new-todo-btn, .todo-form-container {
+    margin-top: 20px;
 }
 
 

@@ -28,7 +28,7 @@
             </div>
         </section>
         <section id="todos_panel" class="todos-panel">
-            <div id="todo_legend" class="todo todo-legend">
+            <div id="todo_legend" class="todo-legend">
                 <p></p>
                 <p>Task</p>
                 <p>Date</p>
@@ -40,14 +40,18 @@
             <button id="new_todo" class="new-todo-btn">New Todo</button>
             <div id="todo_form_container" class="todo-form-container">
                 <form id="todo_form" name="todoForm" class="todo-form" onsubmit="return false">
-                    <input type="checkbox" name="done">
-                    <input type="text" name="title" placeholder="Enter task name..." required>
-                    <input type="date" name="date">
-                    <br>
+                    <div class="todo">
+                        <input type="checkbox" name="done">
+                        <input type="text" name="title" placeholder="Enter task name..." required>
+                        <input type="date" name="date">
+                        <br>
+                        <input type="reset" name="exit" value="Exit">
+                        <input type="submit" name="add" value="Add">
+                    </div>
 
-                    <input type="reset" name="exit" value="Exit">
-                    <input type="submit" name="add" value="Add">
-                    <textarea name="desc" placeholder="Enter task description here..." class="todo-form-textarea"></textarea>
+                    <div class="todo-desc">
+                        <textarea name="desc" placeholder="Enter task description here..." class="todo-form-textarea"></textarea>
+                    </div>
                 </form>
             </div>
         </section>
