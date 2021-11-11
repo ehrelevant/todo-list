@@ -4,7 +4,7 @@
     --secondary-color-1: #FFF;
     --secondary-color-2: #111;
 
-    --hover-color-1: #333;
+    --hover-color-1: #2B2B2B;
 
     --button-color-1: #444;
     --button-hover-color-1: #BBB;
@@ -51,11 +51,6 @@ input:hover {
 
 textarea {
     background-color: var(--secondary-color-2);
-}
-
-
-div, section {
-    /* border: 1px solid black; */
 }
 
 button, input[type="submit"], input[type="reset"] {
@@ -132,7 +127,7 @@ input[type="checkbox"] {
 
 .todo-legend {
     font-weight: bold;
-    background-color: var(--secondary-color-2);
+    background-color: var(--main-color-1);
 }
 
 .todo-title, .todo-desc p {
@@ -170,8 +165,21 @@ input[type="checkbox"] {
     display: none;
 }
 
-.new-todo-btn, .todo-form-container {
+.proj-btn {
+    margin-bottom: 5px;
+}
+
+.new-proj-btn, .proj-form-container {
     margin-top: 20px;
+}
+
+.proj-form-container {
+    align-self: center;
+    width: 90%;
+}
+
+.proj-form, .proj-form input {
+    height: 40px;
 }
 
 
