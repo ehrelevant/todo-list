@@ -12,48 +12,78 @@
 
     <link rel="stylesheet" href="./style.css">
 
-    <script defer src="main.js"></script>
+    <!--
+        <script defer src="main.js"></script>
+    -->
 </head>
 <body>
-    <main id="main" class="main">
-        <section id="projs_panel" class="projs-panel">
-            <div id="project_list" class="proj-list">
-
+    <main>
+        <section>
+            <div>
+                <div>
+                    <button>Proj 1</button>
+                </div>
+                <div>
+                    <button>Proj 2</button>
+                </div>
+                <div>
+                    <button>Proj 3</button>
+                </div>
             </div>
-            <button id="new_project" class="new-proj-btn">New Project</button>
-            <div id="proj_form_container" class="proj-form-container">
-                <form id="proj_form" name="projForm" class="proj-form" onsubmit="return false">
-                    <input type="text" name="title" placeholder="Enter project name..." required>
+            <button>New Project</button>
+            <div>
+                <form name="projForm" onsubmit="return false">
+                    <input type="text" name="title" required>
+                    <input type="reset" name="exit" value="Exit">
+                    <input type="submit" name="add" value="Add">
                 </form>
             </div>
         </section>
-        <section id="todos_panel" class="todos-panel">
-            <div id="todo_legend" class="todo-legend">
-                <p></p>
+        <section>
+            <div>
+                <p>Done</p>
                 <p>Task</p>
                 <p>Date</p>
                 <p>Priority</p>
             </div>
-            <div id="todos_list" class="todos-list">
-
+            <div>
+                <div>
+                    <input type="checkbox">
+                    <p>Todo 1</p>
+                    <p>00/00/0000</p>
+                    <p>High</p>
+                    <p>Description</p>
+                </div>
+                <div>
+                    <input type="checkbox">
+                    <p>Todo 2</p>
+                    <p>00/00/0000</p>
+                    <p>Low</p>
+                    <p>Description</p>
+                </div>
+                <div>
+                    <input type="checkbox">
+                    <p>Todo 2</p>
+                    <p>00/00/0000</p>
+                    <p>Medium</p>
+                    <p>Description</p>
+                </div>
             </div>
-            <button id="new_todo" class="new-todo-btn">New Todo</button>
-            <div id="todo_form_container" class="todo-form-container">
-                <form id="todo_form" name="todoForm" class="todo-form" onsubmit="return false">
-                    <div class="todo">
+
+            <div>
+                <button>New Todo</button>
+                <div>
+                    <form name="todoForm" onsubmit="return false">
                         <input type="checkbox" name="done">
-                        <input type="text" name="title" placeholder="Enter task name..." required>
+                        <input type="text" name="title" required>
                         <input type="date" name="date">
-                        <br>
                         <input type="reset" name="exit" value="Exit">
                         <input type="submit" name="add" value="Add">
-                    </div>
-
-                    <div class="todo-desc">
-                        <textarea name="desc" placeholder="Enter task description here..." class="todo-form-textarea"></textarea>
-                    </div>
-                </form>
+                        <textarea name="desc"></textarea>
+                    </form>
+                </div>
             </div>
+
         </section>
     </main>
 </body>
