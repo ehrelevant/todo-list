@@ -6,3 +6,18 @@ body {
     font-family:  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 18px;
 }
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.proj-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-content {
+    display: flex;
+    flex-direction: column;
+}
