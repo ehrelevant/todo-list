@@ -15,6 +15,7 @@
     <!--
         <script defer src="main.js"></script>
     -->
+    <script src="https://kit.fontawesome.com/49cfe025a4.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -33,19 +34,31 @@
             </div>
             <div class="proj-list">
                 <div class="proj">
-                    <button class="proj-btn">Proj 3</button>
-                    <button class="proj-btn edit-btn">E</button>
-                    <button class="proj-btn del-btn">D</button>
+                    <button class="proj-btn sel-btn">Proj 1</button>
+                    <button class="proj-btn edit-btn">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="proj-btn del-btn">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </div>
                 <div class="proj">
-                    <button class="proj-btn">Proj 3</button>
-                    <button class="proj-btn edit-btn">E</button>
-                    <button class="proj-btn del-btn">D</button>
+                    <button class="proj-btn sel-btn">Proj 2</button>
+                    <button class="proj-btn edit-btn">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="proj-btn del-btn">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </div>
                 <div class="proj">
-                    <button class="proj-btn">Proj 3</button>
-                    <button class="proj-btn edit-btn">E</button>
-                    <button class="proj-btn del-btn">D</button>
+                    <button class="proj-btn sel-btn">Proj 3</button>
+                    <button class="proj-btn edit-btn">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="proj-btn del-btn">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </div>
             </div>
 
@@ -53,8 +66,9 @@
             <div>
                 <form name="projForm" class="proj">
                     <input type="text" name="title" required class="proj-form-text">
-                    <input type="reset" name="exit" value="X" class="proj-btn proj-form-exit">
-                    <input type="submit" name="add" value="A" class="proj-btn proj-form-add">
+                    <button type="submit" class="proj-btn proj-form-add">
+                        <i class="fas fa-plus"></i>
+                    </button>
                 </form>
             </div>
         </section>
@@ -69,8 +83,12 @@
                         <p>00/00/0000</p>
                         <p>High</p>
 
-                        <button class="todo-btn">v</button>
-                        <button class="todo-btn">D</button>
+                        <button class="todo-btn">
+                            <i class="fas fa-caret-down"></i>
+                        </button>
+                        <button class="todo-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </div>
                     <div class="todo-desc hidden">
                         <p>Description</p>
@@ -83,8 +101,12 @@
                         <p>00/00/0000</p>
                         <p>High</p>
 
-                        <button class="todo-btn">v</button>
-                        <button class="todo-btn">D</button>
+                        <button class="todo-btn">
+                            <i class="fas fa-caret-down"></i>
+                        </button>
+                        <button class="todo-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </div>
                     <div class="todo-desc hidden">
                         <p>Description</p>
@@ -97,8 +119,12 @@
                         <p>00/00/0000</p>
                         <p>High</p>
 
-                        <button class="todo-btn">^</button>
-                        <button class="todo-btn">D</button>
+                        <button class="todo-btn">
+                            <i class="fas fa-caret-down"></i>
+                        </button>
+                        <button class="todo-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </div>
                     <div class="todo-desc">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi fugiat distinctio aut, provident voluptate eveniet nemo vitae natus cum libero ducimus, non illo ipsa error ratione suscipit quisquam quaerat ex.</p>
@@ -106,21 +132,25 @@
                 </div>
             </div>
 
-            <button class="todo-btn">New Todo</button>
+            <button class="todo-btn todo-new-btn">New Todo</button>
             <div>
                 <form name="todoForm" class="todo">
                     <div class="todo-content">
                         <input type="checkbox" name="done">
                         <input type="text" name="title" class="todo-form-text" required>
                         <input type="date" name="date" class="todo-form-text">
-                        <select name="priority" class="todo-btn">
+                        <select name="priority" class="todo-form-priority">
                             <option value="1">Low</option>
                             <option value="2">Medium</option>
                             <option value="3">High</option>
                         </select>
 
-                        <input type="reset" name="exit" value="X" class="todo-btn">
-                        <input type="submit" name="add" value="+" class="todo-btn">
+                        <button type="reset" class="todo-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <button type="submit" class="todo-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                     <div class="todo-form-desc">
                         <textarea name="desc" class="todo-form-desc-area"></textarea>
