@@ -3,17 +3,12 @@ let projs = [];
 let selectedProj;
 
 const Todo = (title, dueDate, priority, isDone, description) => {
-    const setPriority = (priority) => {
-        rets.priority = priority
-    }
-
     const switchDone = () => {
         rets.isDone = !rets.isDone
     }
 
     const rets = {
         title, dueDate, priority, isDone, description,
-        setPriority,
         switchDone,
     };
     return rets;
@@ -47,6 +42,7 @@ const Project = (title) => {
 
 
 const MainController = (() => {
+    /*
     function newTodo_raw(proj) {
         todoList = proj.getTodos();
 
@@ -68,10 +64,10 @@ const MainController = (() => {
         projs.push(proj);
         Display.renderProjects();
     }
+    */
 
-    function newTodo(proj, title, date, isDone, desc) {
+    function newTodo(proj, title, date, priority, isDone, desc) {
         todoList = proj.getTodos();
-        const priority = todoList.length + 1;
         const todo = Todo(title, date, priority, isDone, desc);
 
         proj.addTodo(todo);
@@ -79,8 +75,7 @@ const MainController = (() => {
     }
 
     function newProject(title) {
-        const proj = Project();
-        proj.title = title;
+        const proj = Project(title);
         selectedProj = proj;
         projs.push(proj);
         Display.renderProjects();
@@ -94,7 +89,7 @@ const MainController = (() => {
 
 const Display = (() => {
     const projList = document.querySelector('#project_list');
-    const todoList = document.querySelector('#todos_list');
+    const todoList = document.querySelector('#todo_list');
 
     function _displayTodo(todo) {
         const todoObj = ElementBuilder.buildTodo(todo);
@@ -127,6 +122,7 @@ const Display = (() => {
 
 const ElementBuilder = (() => {
     function buildTodo(todo) {
+        /*
         const container = document.createElement('div');
 
         const mainInfo = document.createElement('div');
@@ -263,23 +259,52 @@ const ElementBuilder = (() => {
         container.appendChild(desc);
 
         return container;
+        */
     };
 
     function buildProject(proj) {
-        const container = document.createElement('div');
-        container.classList.add('proj');
-
-        const projBtn = document.createElement('button');
-        projBtn.addEventListener('click', () => {
+        const selBtn = _newElement('button', ['proj-btn', 'sel-btn'])
+        selBtn.textContent = proj.title;
+        selBtn.addEventListener('click', () => {
             selectedProj = proj;
-            Display.renderTodos(proj);
+            Display.renderTodos(proj)
         });
-        projBtn.textContent = proj.title;
-        projBtn.classList.add('proj-btn')
 
-        container.appendChild(projBtn)
+        const editIcon = _newIcon('edit');
+        const editBtn = _newElement('button', ['proj-btn', 'edit-btn'], [editIcon])
+
+        const delIcon = _newIcon('trash-alt');
+        const delBtn = _newElement('button', ['proj-btn', 'del-btn'], [delIcon])
+
+        const container = _newElement('div', ['proj'], [selBtn, editBtn, delBtn]);
 
         return container;
+    }
+
+    function _newElement(tag, classes, children=null) {
+        console.log(children)
+        const element = document.createElement(tag);
+        element.classList.add(...classes);
+        if(children) {
+            _appendChildren(element, children);
+        }
+
+        return element;
+    }
+
+
+    function _newIcon(iconName) {
+        const icon = document.createElement('i');
+        icon.classList.add('fas', `fa-${iconName}`);
+
+        return icon;
+    }
+
+
+    function _appendChildren(parent, children) {
+        children.forEach(child => {
+            parent.appendChild(child);
+        });
     }
 
     return {
@@ -288,6 +313,11 @@ const ElementBuilder = (() => {
 })();
 
 
+MainController.newProject('Proj 1')
+MainController.newTodo(selectedProj, 'Todo 1', '00/00/0000', 'High', true, 'Hello World!')
+
+
+/*
 const todoFormContainer = document.querySelector('#todo_form_container');
 const todoForm = document.forms.todoForm;
 const todoOpenBtn = document.querySelector('#new_todo');
@@ -349,7 +379,4 @@ projForm.addEventListener('submit', () => {
 
     projForm.reset();
 });
-
-
-
-MainController.newProject('Default');
+*/
