@@ -45,7 +45,7 @@
 
             <button>New Project</button>
             <div>
-                <form name="projForm" onsubmit="return false">
+                <form name="projForm" class="proj">
                     <input type="text" name="title" required>
                     <input type="reset" name="exit" value="Exit">
                     <input type="submit" name="add" value="Add">
@@ -55,7 +55,7 @@
 
 
         <section class="todo-panel">
-            <div>
+            <div class="todo-list">
                 <div class="todo">
                     <div class="todo-content">
                         <input type="checkbox">
@@ -63,7 +63,7 @@
                         <p>00/00/0000</p>
                         <p>High</p>
                     </div>
-                    <div class="todo-desc">
+                    <div class="todo-desc hidden">
                         <p>Description</p>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                         <p>00/00/0000</p>
                         <p>High</p>
                     </div>
-                    <div class="todo-desc">
+                    <div class="todo-desc hidden">
                         <p>Description</p>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                         <p>00/00/0000</p>
                         <p>High</p>
                     </div>
-                    <div class="todo-desc">
+                    <div class="todo-desc hidden">
                         <p>Description</p>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
 
             <button>New Todo</button>
             <div>
-                <form name="todoForm" onsubmit="return false">
+                <form name="todoForm">
                     <input type="checkbox" name="done">
                     <input type="text" name="title" required>
                     <input type="date" name="date">
