@@ -41,18 +41,36 @@ button, input {
 
 .proj {
     display: grid;
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: 1fr 30px 30px;
+
+    height: 30px;
 }
 
 .proj-form-title {
     box-sizing: border-box;
     width: 100%;
+
+    outline: none;
+    border: none;
+    border-bottom: 3px solid black;
+    padding: 0 10px;
+}
+
+
+.proj-btn {
+    background-color: unset;
+    border: 1px solid black;
+}
+
+.def-btn, .proj-new-btn {
+    height: 30px;
 }
 
 
 /* Todos  */
 .todo-panel {
     border: 1px solid black;
+    padding: 20px 5%;
 
     display: flex;
     flex-direction: column;
@@ -69,7 +87,7 @@ button, input {
     border-radius: 30px;
     margin-bottom: 10px;
 
-    width: 90%;
+    width: 100%;
     height: auto;
 }
 
