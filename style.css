@@ -27,13 +27,14 @@ body {
     grid-template-columns: 1fr auto auto;
 }
 
+
 /* Todos  */
 .todo-panel {
     display: flex;
     flex-direction: column;
 }
 
-.todo {
+.todo-content {
     display: grid;
     grid-template-columns: auto 4fr 2fr 1fr;
 }

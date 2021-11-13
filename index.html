@@ -57,40 +57,50 @@
         <section class="todo-panel">
             <div>
                 <div class="todo">
-                    <input type="checkbox">
-                    <p>Todo 1</p>
-                    <p>00/00/0000</p>
-                    <p>High</p>
-                    <p>Description</p>
+                    <div class="todo-content">
+                        <input type="checkbox">
+                        <p>Todo 3</p>
+                        <p>00/00/0000</p>
+                        <p>High</p>
+                    </div>
+                    <div class="todo-desc">
+                        <p>Description</p>
+                    </div>
                 </div>
                 <div class="todo">
-                    <input type="checkbox">
-                    <p>Todo 2</p>
-                    <p>00/00/0000</p>
-                    <p>Low</p>
-                    <p>Description</p>
+                    <div class="todo-content">
+                        <input type="checkbox">
+                        <p>Todo 3</p>
+                        <p>00/00/0000</p>
+                        <p>High</p>
+                    </div>
+                    <div class="todo-desc">
+                        <p>Description</p>
+                    </div>
                 </div>
                 <div class="todo">
-                    <input type="checkbox">
-                    <p>Todo 2</p>
-                    <p>00/00/0000</p>
-                    <p>Medium</p>
-                    <p>Description</p>
+                    <div class="todo-content">
+                        <input type="checkbox">
+                        <p>Todo 3</p>
+                        <p>00/00/0000</p>
+                        <p>High</p>
+                    </div>
+                    <div class="todo-desc">
+                        <p>Description</p>
+                    </div>
                 </div>
             </div>
 
             <button>New Todo</button>
             <div>
-                <div>
-                    <form name="todoForm" onsubmit="return false">
-                        <input type="checkbox" name="done">
-                        <input type="text" name="title" required>
-                        <input type="date" name="date">
-                        <input type="reset" name="exit" value="Exit">
-                        <input type="submit" name="add" value="Add">
-                        <textarea name="desc"></textarea>
-                    </form>
-                </div>
+                <form name="todoForm" onsubmit="return false">
+                    <input type="checkbox" name="done">
+                    <input type="text" name="title" required>
+                    <input type="date" name="date">
+                    <input type="reset" name="exit" value="Exit">
+                    <input type="submit" name="add" value="Add">
+                    <textarea name="desc"></textarea>
+                </form>
             </div>
         </section>
     </main>
