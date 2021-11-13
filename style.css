@@ -20,6 +20,8 @@ button, input {
 .content {
     display: grid;
     grid-template-columns: 1fr 4fr;
+
+    height: 100vh;
 }
 
 
@@ -53,7 +55,6 @@ button, input {
     outline: none;
     border: none;
     border-bottom: 3px solid black;
-    padding: 0 10px;
 }
 
 
@@ -93,7 +94,7 @@ button, input {
 
 .todo-content {
     display: grid;
-    grid-template-columns: auto 4fr 2fr 1fr;
+    grid-template-columns: auto 4fr 2fr 1fr 20px 20px;
     gap: 1%;
 
     align-items: center;
@@ -104,6 +105,20 @@ button, input {
 .todo-desc {
     border-top: 1px solid black;
     margin: 0 4%;
+}
+
+.todo-form-desc {
+    border-top: 1px solid black;
+    margin: 0 4%;
+}
+
+.todo-form-desc-area {
+    resize: vertical;
+    box-sizing: border-box;
+
+    margin: 16px 0;
+    width: 100%;
+    min-height: 22px;
 }
 
 
