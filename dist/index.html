@@ -26,34 +26,35 @@
     <main class="content">
         <section class="proj-panel">
             <div class="def-proj-list">
-                <button>All</button>
-                <button>Today</button>
-                <button>Week</button>
+                <button class="proj-btn def-btn">All</button>
+                <button class="proj-btn def-btn">Today</button>
+                <button class="proj-btn def-btn">Week</button>
+                <button class="proj-btn def-btn">Month</button>
             </div>
             <div class="proj-list">
                 <div class="proj">
-                    <button>Proj 1</button>
-                    <button>E</button>
-                    <button>D</button>
+                    <button class="proj-btn">Proj 3</button>
+                    <button class="proj-btn edit-btn">E</button>
+                    <button class="proj-btn del-btn">D</button>
                 </div>
                 <div class="proj">
-                    <button>Proj 2</button>
-                    <button>E</button>
-                    <button>D</button>
+                    <button class="proj-btn">Proj 3</button>
+                    <button class="proj-btn edit-btn">E</button>
+                    <button class="proj-btn del-btn">D</button>
                 </div>
                 <div class="proj">
-                    <button>Proj 3</button>
-                    <button>E</button>
-                    <button>D</button>
+                    <button class="proj-btn">Proj 3</button>
+                    <button class="proj-btn edit-btn">E</button>
+                    <button class="proj-btn del-btn">D</button>
                 </div>
             </div>
 
-            <button>New Project</button>
+            <button class="proj-btn proj-new-btn">New Project</button>
             <div>
                 <form name="projForm" class="proj">
-                    <input type="text" name="title" class="proj-form-title" required>
-                    <input type="reset" name="exit" value="X">
-                    <input type="submit" name="add" value="+">
+                    <input type="text" name="title" required class="proj-form-title">
+                    <input type="reset" name="exit" value="X" class="proj-btn proj-form-exit">
+                    <input type="submit" name="add" value="A" class="proj-btn proj-form-add">
                 </form>
             </div>
         </section>
