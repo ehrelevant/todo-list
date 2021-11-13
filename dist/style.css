@@ -12,11 +12,6 @@ body {
     font-size: var(--default-font-size);
 }
 
-button, input {
-    font-family: var(--default-font);
-    font-size: var(--btn-font-size);
-}
-
 .content {
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -43,12 +38,13 @@ button, input {
 
 .proj {
     display: grid;
-    grid-template-columns: 1fr 30px 30px;
+    grid-template-columns: 1fr auto auto;
+    gap: 5px;
 
     height: 30px;
 }
 
-.proj-form-title {
+.proj-form-text {
     box-sizing: border-box;
     width: 100%;
 
@@ -94,7 +90,7 @@ button, input {
 
 .todo-content {
     display: grid;
-    grid-template-columns: auto 4fr 2fr 1fr 20px 20px;
+    grid-template-columns: auto 4fr 2fr 1fr auto auto;
     gap: 1%;
 
     align-items: center;
@@ -119,6 +115,20 @@ button, input {
     margin: 16px 0;
     width: 100%;
     min-height: 22px;
+    height: 68px;
+    outline: none;
+}
+
+
+.todo-form-text {
+    outline: none;
+    border: none;
+    border-bottom: 3px solid black;
+}
+
+.todo-btn {
+    background-color: unset;
+    border: 1px solid black;
 }
 
 
