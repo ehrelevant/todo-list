@@ -2,6 +2,40 @@
     --default-font:  Ubuntu, monospace, Arial;
     --default-font-size: 16px;
     --btn-font-size: 12px;
+
+
+    /* Color Presets */
+    --projs-panel-main: #222;
+
+    --proj-btn: unset;
+    --proj-btn-hover: #555;
+    --proj-btn-selected: #ddd;
+
+
+    --todos-panel-main: #333;
+
+    --todo-main: #444;
+    --todo-main-hover: #555;
+
+    --todo-btn: #444;
+    --todo-btn-hover: #666;
+
+    --todo-textarea: #22222288;
+
+
+    --text-main: #fff;
+    --text-secondary: #222;
+
+
+    --checkbox-main: #fff;
+    --checkbox-secondary: #aaa;
+
+
+    --input-line-color: #888;
+    --input-line-color-hover: #bbb;
+    --input-line-color-focus: #fff;
+
+    --border-main: #888;
 }
 
 body {
@@ -10,6 +44,10 @@ body {
 
     font-family: var(--default-font);
     font-size: var(--default-font-size);
+}
+
+body, input, button, textarea, select {
+    color: var(--text-main);
 }
 
 .content {
@@ -22,7 +60,7 @@ body {
 
 /* Projects */
 .proj-panel {
-    border: 1px solid black;
+    background-color: var(--projs-panel-main);
 
     display: flex;
     flex-direction: column;
@@ -53,7 +91,8 @@ body {
 
     outline: none;
     border: none;
-    border-bottom: 3px solid black;
+    background-color: unset;
+    border-bottom: 2px solid var(--input-line-color);
 }
 
 
@@ -69,19 +108,32 @@ body {
 }
 
 .sel-btn, .def-btn, .proj-new-btn {
-    border-radius: 30px;
-    background-color: #ddd;
+    text-align: left;
+    padding: 0 5%;
+
+    border-radius: 12px;
+    background-color: var(--proj-btn);
+    transition: background-color 50ms;
+}
+
+.sel-btn:hover:not(.selected), .def-btn:hover:not(.selected), .proj-new-btn:hover:not(.selected) {
+    background-color: var(--proj-btn-hover);
 }
 
 .sel-btn {
     height: 100%;
 }
 
+.selected {
+    background-color: var(--proj-btn-selected);
+    color: var(--text-secondary);
+}
+
 
 
 /* Todos  */
 .todo-panel {
-    border: 1px solid black;
+    background-color: var(--todos-panel-main);
     padding: 20px 5%;
 
     display: flex;
@@ -95,12 +147,18 @@ body {
 }
 
 .todo {
-    border: 1px solid black;
     border-radius: 30px;
     margin-bottom: 10px;
+    background-color: var(--todo-main);
 
     width: 100%;
     height: auto;
+
+    transition: background-color 50ms;
+}
+
+.todo:hover {
+    background-color: var(--todo-main-hover);
 }
 
 .todo-content {
@@ -114,12 +172,7 @@ body {
 }
 
 .todo-desc {
-    border-top: 1px solid black;
-    margin: 0 4%;
-}
-
-.todo-form-desc {
-    border-top: 1px solid black;
+    border-top: 3px solid var(--border-main);
     margin: 0 4%;
 }
 
@@ -129,26 +182,16 @@ body {
 
     margin: 16px 0;
     width: 100%;
-    min-height: 22px;
-    height: 68px;
-    outline: none;
-}
+    min-height: 78px;
 
-
-
-
-.todo-form-text {
     outline: none;
     border: none;
-    border-bottom: 3px solid black;
+    border-radius: 8px;
+    padding: 8px 1%;
+
+    background-color: var(--todo-textarea);
 }
 
-.todo-form-priority {
-    background-color: unset;
-    outline: none;
-    border: none;
-    border-bottom: 3px solid black;
-}
 
 .todo-btn {
     background-color: unset;
@@ -158,11 +201,60 @@ body {
 }
 
 .todo-new-btn {
+    background-color: var(--todo-btn);
+
     height: 50px;
     border-radius: 30px;
+
+    transition: background-color 50ms;
+}
+
+.todo-new-btn:hover {
+    background-color: var(--todo-btn-hover);
+}
+
+.todo-form-text {
+    outline: none;
+    border: none;
+    background-color: unset;
+    border-bottom: 2px solid var(--input-line-color);
+}
+
+.proj-form-text, .todo-form-text {
+    transition: border-bottom 100ms;
+}
+
+.proj-form-text:hover, .todo-form-text:hover {
+    border-bottom: 2px solid var(--input-line-color-hover);
+}
+
+.proj-form-text:focus, .todo-form-text:focus {
+    border-bottom: 2px solid var(--input-line-color-focus);
 }
 
 
+
+
+.checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance:none;
+
+    width: 20px;
+    height: 20px;
+
+    border-top: 3px solid var(--checkbox-main);
+    border-left: 3px solid var(--checkbox-main);
+    border-bottom: 3px solid var(--checkbox-secondary);
+    border-right: 3px solid var(--checkbox-secondary);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.checkbox:checked {
+    background-color: var(--checkbox-secondary);
+}
 
 
 .hidden {
