@@ -29,6 +29,11 @@ button, input {
     flex-direction: column;
 }
 
+.def-proj-list {
+    display: flex;
+    flex-direction: column;
+}
+
 .proj {
     display: grid;
     grid-template-columns: 1fr auto auto;
@@ -49,7 +54,7 @@ button, input {
 
 .todo {
     border: 1px solid black;
-    border-radius: 40px;
+    border-radius: 30px;
     margin-bottom: 10px;
 
     width: 90%;
@@ -64,6 +69,11 @@ button, input {
     align-items: center;
     height: 50px;
     padding: 0 4%;
+}
+
+.todo-desc {
+    border-top: 1px solid black;
+    margin: 0 4%;
 }
 
 
