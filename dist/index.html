@@ -68,6 +68,9 @@
                         <p>Todo 3</p>
                         <p>00/00/0000</p>
                         <p>High</p>
+
+                        <button>v</button>
+                        <button>D</button>
                     </div>
                     <div class="todo-desc hidden">
                         <p>Description</p>
@@ -79,6 +82,9 @@
                         <p>Todo 3</p>
                         <p>00/00/0000</p>
                         <p>High</p>
+
+                        <button>v</button>
+                        <button>D</button>
                     </div>
                     <div class="todo-desc hidden">
                         <p>Description</p>
@@ -90,8 +96,11 @@
                         <p>Todo 3</p>
                         <p>00/00/0000</p>
                         <p>High</p>
+
+                        <button>^</button>
+                        <button>D</button>
                     </div>
-                    <div class="todo-desc hidden">
+                    <div class="todo-desc">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi fugiat distinctio aut, provident voluptate eveniet nemo vitae natus cum libero ducimus, non illo ipsa error ratione suscipit quisquam quaerat ex.</p>
                     </div>
                 </div>
@@ -99,18 +108,23 @@
 
             <button>New Todo</button>
             <div>
-                <form name="todoForm">
-                    <input type="checkbox" name="done">
-                    <input type="text" name="title" required>
-                    <input type="date" name="date">
-                    <select name="priority">
-                        <option value="1">Low</option>
-                        <option value="2">Medium</option>
-                        <option value="3">High</option>
-                    </select>
-                    <input type="reset" name="exit" value="X">
-                    <input type="submit" name="add" value="+">
-                    <textarea name="desc"></textarea>
+                <form name="todoForm" class="todo">
+                    <div class="todo-content">
+                        <input type="checkbox" name="done">
+                        <input type="text" name="title" required>
+                        <input type="date" name="date">
+                        <select name="priority">
+                            <option value="1">Low</option>
+                            <option value="2">Medium</option>
+                            <option value="3">High</option>
+                        </select>
+
+                        <input type="reset" name="exit" value="X">
+                        <input type="submit" name="add" value="+">
+                    </div>
+                    <div class="todo-form-desc">
+                        <textarea name="desc" class="todo-form-desc-area"></textarea>
+                    </div>
                 </form>
             </div>
         </section>
