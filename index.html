@@ -51,7 +51,7 @@
             <button>New Project</button>
             <div>
                 <form name="projForm" class="proj">
-                    <input type="text" name="title" required>
+                    <input type="text" name="title" class="proj-form-title" required>
                     <input type="reset" name="exit" value="X">
                     <input type="submit" name="add" value="+">
                 </form>
@@ -102,6 +102,11 @@
                     <input type="checkbox" name="done">
                     <input type="text" name="title" required>
                     <input type="date" name="date">
+                    <select name="priority">
+                        <option value="1">Low</option>
+                        <option value="2">Medium</option>
+                        <option value="3">High</option>
+                    </select>
                     <input type="reset" name="exit" value="X">
                     <input type="submit" name="add" value="+">
                     <textarea name="desc"></textarea>

@@ -25,8 +25,13 @@ button, input {
 
 /* Projects */
 .proj-panel {
+    border: 1px solid black;
+
     display: flex;
     flex-direction: column;
+    gap: 16px;
+
+    padding: 20px 5%;
 }
 
 .def-proj-list {
@@ -39,9 +44,16 @@ button, input {
     grid-template-columns: 1fr auto auto;
 }
 
+.proj-form-title {
+    box-sizing: border-box;
+    width: 100%;
+}
+
 
 /* Todos  */
 .todo-panel {
+    border: 1px solid black;
+
     display: flex;
     flex-direction: column;
 }
