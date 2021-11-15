@@ -319,12 +319,66 @@ MainController.newProject('Proj 1')
 // MainController.newTodo(selectedProj, 'Todo 1', '00/00/0000', 'High', true, 'Hello World!')
 
 
-
 const todoForm = document.forms.todoForm;
 const todoOpenBtn = document.querySelector('#new_todo');
 
 const projForm = document.forms.projForm;
-const projOpenBtn = document.querySelector('#new_project');
+const projOpenBtn = document.querySelector('#new_proj');
+
+projOpenBtn.addEventListener('click', () => {
+    projOpenBtn.classList.add('hidden');
+    projForm.parentNode.classList.remove('hidden');
+});
+
+projForm.addEventListener('keydown', (evt) => {
+    if(evt.key === 'Escape') {
+        projOpenBtn.classList.remove('hidden');
+    projForm.parentNode.classList.add('hidden');
+        projForm.reset();
+    }
+});
+
+projForm.addEventListener('submit', () => {
+    projOpenBtn.classList.remove('hidden');
+    projForm.parentNode.classList.add('hidden');
+
+    MainController.newProject(projForm['title'].value);
+
+    projForm.reset();
+});
+
+
+todoOpenBtn.addEventListener('click', () => {
+    todoOpenBtn.classList.add('hidden');
+    todoForm.parentNode.classList.remove('hidden');
+});
+
+todoForm.addEventListener('reset', () => {
+    todoOpenBtn.classList.remove('hidden');
+    todoForm.parentNode.classList.add('hidden');
+});
+
+todoForm.addEventListener('keydown', (evt) => {
+    if(evt.key === 'Escape') {
+        todoOpenBtn.classList.remove('hidden');
+        todoForm.parentNode.classList.add('hidden');
+    }
+});
+
+todoForm.addEventListener('submit', () => {
+    todoOpenBtn.classList.remove('hidden');
+    todoForm.parentNode.classList.add('hidden');
+
+    MainController.newTodo(selectedProj,
+                           todoForm['title'].value,
+                           todoForm['date'].value,
+                           todoForm['done'].checked,
+                           todoForm['desc'].value,
+                           );
+
+    todoForm.reset();
+});
+
 
 /*
 const todoFormContainer = document.querySelector('#todo_form_container');
@@ -360,32 +414,5 @@ todoForm.addEventListener('submit', () => {
                            );
 
     todoForm.reset();
-});
-
-
-
-const projFormContainer = document.querySelector('#proj_form_container');
-const projForm = document.forms.projForm;
-const projOpenBtn = document.querySelector('#new_project');
-projOpenBtn.addEventListener('click', () => {
-    projFormContainer.classList.add('form-open');
-    projOpenBtn.classList.add('form-open');
-});
-
-projForm.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') {
-        projFormContainer.classList.remove('form-open');
-        projOpenBtn.classList.remove('form-open');
-        projForm.reset();
-    }
-});
-
-projForm.addEventListener('submit', () => {
-    projFormContainer.classList.remove('form-open');
-    projOpenBtn.classList.remove('form-open');
-
-    MainController.newProject(projForm['title'].value);
-
-    projForm.reset();
 });
 */
