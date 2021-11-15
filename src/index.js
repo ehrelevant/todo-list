@@ -64,7 +64,7 @@ const MainController = (() => {
         projs.push(proj);
         Display.renderProjects();
     }
-    */
+
 
     function newTodo(proj, title, date, priority, isDone, desc) {
         todoList = proj.getTodos();
@@ -73,6 +73,7 @@ const MainController = (() => {
         proj.addTodo(todo);
         Display.renderTodos(proj);
     }
+    */
 
     function newProject(title) {
         const proj = Project(title);
@@ -82,7 +83,7 @@ const MainController = (() => {
     }
 
     return {
-        newTodo, newProject
+        newProject
     };
 })();
 
@@ -91,6 +92,7 @@ const Display = (() => {
     const projList = document.querySelector('#project_list');
     const todoList = document.querySelector('#todo_list');
 
+    /*
     function _displayTodo(todo) {
         const todoObj = ElementBuilder.buildTodo(todo);
         todoList.appendChild(todoObj);
@@ -102,6 +104,7 @@ const Display = (() => {
             _displayTodo(todo)
         });
     }
+    */
 
     function _displayProjects(proj) {
         const projObj = ElementBuilder.buildProject(proj);
@@ -116,7 +119,7 @@ const Display = (() => {
     }
 
     return {
-        renderProjects, renderTodos
+        renderProjects
     };
 })();
 
@@ -282,7 +285,6 @@ const ElementBuilder = (() => {
     }
 
     function _newElement(tag, classes, children=null) {
-        console.log(children)
         const element = document.createElement(tag);
         element.classList.add(...classes);
         if(children) {
@@ -314,8 +316,15 @@ const ElementBuilder = (() => {
 
 
 MainController.newProject('Proj 1')
-MainController.newTodo(selectedProj, 'Todo 1', '00/00/0000', 'High', true, 'Hello World!')
+// MainController.newTodo(selectedProj, 'Todo 1', '00/00/0000', 'High', true, 'Hello World!')
 
+
+
+const todoForm = document.forms.todoForm;
+const todoOpenBtn = document.querySelector('#new_todo');
+
+const projForm = document.forms.projForm;
+const projOpenBtn = document.querySelector('#new_project');
 
 /*
 const todoFormContainer = document.querySelector('#todo_form_container');
