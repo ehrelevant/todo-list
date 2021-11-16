@@ -23,16 +23,9 @@ const Project = (title) => {
 
     const getTodos = () => _todos;
 
-    const _arrangePriority = () => {
-        _todos.reduce((i, todo) => {
-            todo.setPriority(i);
-            return i + 1;
-        }, 1);
-    };
-
     const deleteTodo = (todo) => {
         _todos.splice(_todos.indexOf(todo), 1);
-        _arrangePriority();
+        Display.renderTodosPanel();
     };
 
     return {
@@ -42,48 +35,24 @@ const Project = (title) => {
 
 
 const MainController = (() => {
-    /*
-    function newTodo_raw(proj) {
-        todoList = proj.getTodos();
-
-        const title = prompt('Task Title');
-        const dueDate = prompt('Due Date');
-        const priority = todoList.length + 1;
-        const isDone = (prompt('Is it done yet?') === 'true');
-
-        const desc = prompt('Description');
-
-        const todo = Todo(title, dueDate, priority, isDone, desc);
-        proj.addTodo(todo);
-        Display.renderTodos(proj);
-    }
-
-    function newProject_raw() {
-        const proj = Project();
-        proj.title = prompt('Project Title');
-        projs.push(proj);
-        Display.renderProjects();
-    }
-
-
     function newTodo(proj, title, date, priority, isDone, desc) {
         todoList = proj.getTodos();
         const todo = Todo(title, date, priority, isDone, desc);
-
         proj.addTodo(todo);
-        Display.renderTodos(proj);
+
+        Display.renderTodosPanel(proj);
     }
-    */
 
     function newProject(title) {
         const proj = Project(title);
         selectedProj = proj;
         projs.push(proj);
-        Display.renderProjects();
+
+        Display.renderProjectPanel();
     }
 
     return {
-        newProject
+        newProject, newTodo
     };
 })();
 
@@ -92,146 +61,98 @@ const Display = (() => {
     const projList = document.querySelector('#project_list');
     const todoList = document.querySelector('#todo_list');
 
-    /*
     function _displayTodo(todo) {
         const todoObj = ElementBuilder.buildTodo(todo);
         todoList.appendChild(todoObj);
     }
 
-    function renderTodos(proj) {
+    function renderTodosPanel(proj) {
         todoList.textContent = '';
         proj.getTodos().forEach(todo => {
             _displayTodo(todo)
         });
     }
-    */
 
-    function _displayProjects(proj) {
+    function _displayProject(proj) {
         const projObj = ElementBuilder.buildProject(proj);
         projList.appendChild(projObj);
     }
 
-    function renderProjects() {
+    function renderProjectPanel() {
         projList.textContent = '';
         projs.forEach(proj => {
-            _displayProjects(proj)
+            _displayProject(proj)
         });
     }
 
     return {
-        renderProjects
+        renderProjectPanel, renderTodosPanel
     };
 })();
 
+
 const ElementBuilder = (() => {
     function buildTodo(todo) {
-        /*
-        const container = document.createElement('div');
+        const doneCbox = _newInput('checkbox', todo.isDone, ['checkbox']);
 
-        const mainInfo = document.createElement('div');
-        mainInfo.classList.add('todo');
+        const title = _newElement('p', undefined, undefined, todo.title);
+        const titleInput = _newInput('text', todo.title, ['todo-form-text', 'hidden']);
+        titleInput.required;
 
-        const isDone = document.createElement('input');
-        isDone.type = 'checkbox';
-        isDone.checked = todo.isDone;
-
-
-        const title = document.createElement('p');
-        title.classList.add('todo-title');
-        title.textContent = todo.title;
-
-        const titleInput = document.createElement('input');
-        titleInput.classList.add('hidden');
-        titleInput.type = 'text';
-        titleInput.value = todo.title;
-
-        title.addEventListener('dblclick', () => {
-            title.classList.add('hidden');
-            titleInput.classList.remove('hidden');
-            titleInput.focus();
-        });
-        titleInput.addEventListener('change', () => {
-            todo.title = titleInput.value;
-            title.textContent = titleInput.value;
-
-            title.classList.remove('hidden');
-            titleInput.classList.add('hidden');
-        });
+        const dueDate = _newElement('p', undefined, undefined, (todo.dueDate) ? todo.dueDate : 'No Info');
+        const dueDateInput = _newInput('date', todo.dueDate, ['todo-form-text', 'hidden']);
 
 
-        const dueDate = document.createElement('p');
-        dueDate.classList.add('todo-date');
-        dueDate.textContent = todo.dueDate;
+        const priority = _newElement('p', undefined, undefined, (todo.priority) ? todo.priority : 'No Info');
 
-        const dueDateInput = document.createElement('input');
-        dueDateInput.classList.add('hidden');
-        dueDateInput.type = 'date';
-        dueDateInput.value = todo.dueDate;
-
-        dueDate.addEventListener('dblclick', () => {
-            dueDate.classList.add('hidden');
-            dueDateInput.classList.remove('hidden');
-            dueDateInput.focus();
-        });
-        dueDateInput.addEventListener('change', () => {
-            todo.dueDate = dueDateInput.value;
-            dueDate.textContent = dueDateInput.value;
-
-            dueDate.classList.remove('hidden');
-            dueDateInput.classList.add('hidden');
-        });
+        const selectLow = _newElement('option', undefined, undefined, 'Low');
+        selectLow.value = 'Low';
+        const selectMed = _newElement('option', undefined, undefined, 'Medium');
+        selectMed.value = 'Medium';
+        const selectHigh = _newElement('option', undefined, undefined, 'High');
+        selectHigh.value = 'High';
+        const priorityInput = _newElement('select', ['todo-form-text', 'hidden'], [selectLow, selectMed, selectHigh]);
 
 
-        const priority = document.createElement('p');
-        priority.classList.add('todo-priority');
-        priority.textContent = todo.priority;
+        const descIcon = _newIcon('caret-down');
+        const descBtn = _newElement('button', ['todo-btn'], [descIcon]);
+
+        const delIcon = _newIcon('trash-alt');
+        const delBtn = _newElement('button', ['todo-btn'], [delIcon]);
 
 
-        const descBtn = document.createElement('button');
-        descBtn.textContent = 'Expand';
+        const descText = _newElement('p', undefined, undefined, (todo.description) ? todo.description : 'No Info');
+        const descInput = _newElement('textarea', ['todo-form-desc-area', 'hidden'], undefined, todo.description);
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
+        const todoDesc = _newElement('div', ['todo-desc', 'hidden'], [descText, descInput]);
 
-        deleteBtn.addEventListener('click', () => {
+
+        // Todo Eventlisteners
+        _addEditEvent(title, titleInput, todo, 'title')
+        _addEditEvent(dueDate, dueDateInput, todo, 'dueDate')
+        _addEditEvent(priority, priorityInput, todo, 'priority')
+        _addEditEvent(descText, descInput, todo, 'description')
+
+
+        doneCbox.addEventListener('change', todo.switchDone);
+
+        delBtn.addEventListener('click', () => {
             selectedProj.deleteTodo(todo);
             Display.renderTodos(selectedProj);
         });
-
-
-        const desc = document.createElement('div');
-        desc.classList.add('todo-desc', 'hidden');
-        const descText = document.createElement('p');
-        descText.textContent = (todo.description) ? todo.description : 'No Description...';
-        descText.classList.add('todo-desc-text');
-
-        const descInput = document.createElement('textarea');
-        descInput.classList.add('hidden', 'todo-edit-textarea', 'todo-desc-text');
-        descInput.value = todo.description;
-
-        descText.addEventListener('dblclick', () => {
-            descText.classList.add('hidden');
-            descInput.classList.remove('hidden');
-            descInput.focus()
-        });
-        descInput.addEventListener('change', () => {
-            todo.description = descInput.value;
-            descText.textContent = descInput.value;
-
-            descText.classList.remove('hidden');
-            descInput.classList.add('hidden');
-        });
-
-        desc.appendChild(descText);
-        desc.appendChild(descInput);
-
-
-        isDone.addEventListener('change', todo.switchDone);
         descBtn.addEventListener('click', () => {
-            desc.classList.toggle('hidden');
+            todoDesc.classList.toggle('hidden');
         });
 
 
+        const todoContent = _newElement('div',
+                ['todo-content'], [doneCbox,
+                title, titleInput,
+                dueDate, dueDateInput,
+                priority, priorityInput,
+                descBtn, delBtn]);
+
+        const container = _newElement('div', ['todo'], [todoContent, todoDesc]);
         container.addEventListener('focusout', () => {
             title.classList.remove('hidden');
             titleInput.classList.add('hidden');
@@ -239,38 +160,36 @@ const ElementBuilder = (() => {
             dueDate.classList.remove('hidden');
             dueDateInput.classList.add('hidden');
 
+            priority.classList.remove('hidden');
+            priorityInput.classList.add('hidden')
+
             descText.classList.remove('hidden');
             descInput.classList.add('hidden');
         });
 
-
-        mainInfo.appendChild(isDone);
-
-        mainInfo.appendChild(title);
-        mainInfo.appendChild(titleInput);
-
-        mainInfo.appendChild(dueDate);
-        mainInfo.appendChild(dueDateInput);
-
-        mainInfo.appendChild(priority);
-
-        mainInfo.appendChild(descBtn);
-        mainInfo.appendChild(deleteBtn);
-
-
-        container.appendChild(mainInfo);
-        container.appendChild(desc);
-
         return container;
-        */
-    };
+    }
+
+    function _addEditEvent(element, input, todo, todoName) {
+        element.addEventListener('dblclick', () => {
+            element.classList.add('hidden');
+            input.classList.remove('hidden');
+            input.focus();
+        });
+        input.addEventListener('change', () => {
+            todo[todoName] = input.value;
+            element.textContent = (input.value) ? input.value : 'No Info';
+
+            element.classList.remove('hidden');
+            input.classList.add('hidden');
+        });
+    }
 
     function buildProject(proj) {
-        const selBtn = _newElement('button', ['proj-btn', 'sel-btn'])
-        selBtn.textContent = proj.title;
+        const selBtn = _newElement('button', ['proj-btn', 'sel-btn'], undefined, proj.title);
         selBtn.addEventListener('click', () => {
             selectedProj = proj;
-            Display.renderTodos(proj)
+            Display.renderTodosPanel(proj)
         });
 
         const editIcon = _newIcon('edit');
@@ -284,9 +203,36 @@ const ElementBuilder = (() => {
         return container;
     }
 
-    function _newElement(tag, classes, children=null) {
+    function _newElement(tag, classes=null, children=null, text=null) {
         const element = document.createElement(tag);
-        element.classList.add(...classes);
+
+        if(classes) {
+            element.classList.add(...classes);
+        }
+        if(children) {
+            _appendChildren(element, children);
+        }
+        if(text) {
+            element.textContent = text;
+        }
+
+        return element;
+    }
+
+    function _newInput(type, value=null, classes=null, children=null) {
+        const element = document.createElement('input');
+        element.type = type;
+
+        if(value) {
+            if(type === 'checkbox') {
+                element.checked = value;
+            } else {
+                element.value = value;
+            }
+        }
+        if(classes) {
+            element.classList.add(...classes);
+        }
         if(children) {
             _appendChildren(element, children);
         }
@@ -294,14 +240,12 @@ const ElementBuilder = (() => {
         return element;
     }
 
-
     function _newIcon(iconName) {
         const icon = document.createElement('i');
         icon.classList.add('fas', `fa-${iconName}`);
 
         return icon;
     }
-
 
     function _appendChildren(parent, children) {
         children.forEach(child => {
@@ -333,12 +277,6 @@ projForm.addEventListener('keydown', (evt) => {
         projForm.parentNode.classList.add('hidden');
         projForm.reset();
     }
-});
-
-projForm.addEventListener('focusout', (evt) => {
-    projOpenBtn.classList.remove('hidden');
-    projForm.parentNode.classList.add('hidden');
-    projForm.reset();
 });
 
 projForm.addEventListener('submit', () => {
@@ -375,6 +313,7 @@ todoForm.addEventListener('submit', () => {
     MainController.newTodo(selectedProj,
                            todoForm['title'].value,
                            todoForm['date'].value,
+                           todoForm['priority'].value,
                            todoForm['done'].checked,
                            todoForm['desc'].value,
                            );
