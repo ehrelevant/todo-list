@@ -64,7 +64,7 @@
 
             <button id="new_proj" class="proj-btn proj-new-btn">New Project</button>
             <div class="hidden">
-                <form name="projForm" class="proj">
+                <form name="projForm" class="proj" onsubmit="return false">
                     <input type="text" name="title" required class="proj-form-text">
                     <button type="submit" class="proj-btn proj-form-add">
                         <i class="fas fa-plus"></i>
@@ -136,7 +136,7 @@
 
             <button id="new_todo" class="todo-btn todo-new-btn">New Todo</button>
             <div class="hidden">
-                <form name="todoForm" class="todo">
+                <form name="todoForm" class="todo" onsubmit="return false">
                     <div class="todo-content">
                         <input type="checkbox" name="done" class="checkbox">
                         <input type="text" name="title" class="todo-form-text" required>
