@@ -315,10 +315,6 @@ const ElementBuilder = (() => {
 })();
 
 
-MainController.newProject('Proj 1')
-// MainController.newTodo(selectedProj, 'Todo 1', '00/00/0000', 'High', true, 'Hello World!')
-
-
 const todoForm = document.forms.todoForm;
 const todoOpenBtn = document.querySelector('#new_todo');
 
@@ -328,14 +324,21 @@ const projOpenBtn = document.querySelector('#new_proj');
 projOpenBtn.addEventListener('click', () => {
     projOpenBtn.classList.add('hidden');
     projForm.parentNode.classList.remove('hidden');
+    projForm.children[0].focus();
 });
 
 projForm.addEventListener('keydown', (evt) => {
     if(evt.key === 'Escape') {
         projOpenBtn.classList.remove('hidden');
-    projForm.parentNode.classList.add('hidden');
+        projForm.parentNode.classList.add('hidden');
         projForm.reset();
     }
+});
+
+projForm.addEventListener('focusout', (evt) => {
+    projOpenBtn.classList.remove('hidden');
+    projForm.parentNode.classList.add('hidden');
+    projForm.reset();
 });
 
 projForm.addEventListener('submit', () => {
@@ -380,39 +383,7 @@ todoForm.addEventListener('submit', () => {
 });
 
 
-/*
-const todoFormContainer = document.querySelector('#todo_form_container');
-const todoForm = document.forms.todoForm;
-const todoOpenBtn = document.querySelector('#new_todo');
-todoOpenBtn.addEventListener('click', () => {
-    todoFormContainer.classList.add('form-open');
-    todoOpenBtn.classList.add('form-open');
-});
 
-todoForm.addEventListener('reset', () => {
-    todoFormContainer.classList.remove('form-open');
-    todoOpenBtn.classList.remove('form-open');
-});
 
-todoForm.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
-        todoFormContainer.classList.remove('form-open');
-        todoOpenBtn.classList.remove('form-open');
-        todoForm.reset();
-    }
-});
-
-todoForm.addEventListener('submit', () => {
-    todoFormContainer.classList.remove('form-open');
-    todoOpenBtn.classList.remove('form-open');
-
-    MainController.newTodo(selectedProj,
-                           todoForm['title'].value,
-                           todoForm['date'].value,
-                           todoForm['done'].checked,
-                           todoForm['desc'].value,
-                           );
-
-    todoForm.reset();
-});
-*/
+MainController.newProject('Proj 1')
+// MainController.newTodo(selectedProj, 'Todo 1', '00/00/0000', 'High', true, 'Hello World!')
