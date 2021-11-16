@@ -25,7 +25,6 @@ const Project = (title) => {
 
     const deleteTodo = (todo) => {
         _todos.splice(_todos.indexOf(todo), 1);
-        Display.renderTodosPanel();
     };
 
     return {
@@ -138,7 +137,7 @@ const ElementBuilder = (() => {
 
         delBtn.addEventListener('click', () => {
             selectedProj.deleteTodo(todo);
-            Display.renderTodos(selectedProj);
+            Display.renderTodosPanel(selectedProj);
         });
         descBtn.addEventListener('click', () => {
             todoDesc.classList.toggle('hidden');
