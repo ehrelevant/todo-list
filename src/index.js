@@ -186,10 +186,8 @@ const ElementBuilder = (() => {
 
     function buildProject(proj) {
         const selBtn = _newElement('button', ['proj-btn', 'sel-btn'], undefined, proj.title);
-        selBtn.addEventListener('click', () => {
-            selectedProj = proj;
-            Display.renderTodosPanel(proj)
-        });
+        const selInput = _newInput('text', proj.title, ['proj-form-text', 'hidden']);
+        selInput.required;
 
         const editIcon = _newIcon('edit');
         const editBtn = _newElement('button', ['proj-btn', 'edit-btn'], [editIcon])
@@ -197,7 +195,46 @@ const ElementBuilder = (() => {
         const delIcon = _newIcon('trash-alt');
         const delBtn = _newElement('button', ['proj-btn', 'del-btn'], [delIcon])
 
-        const container = _newElement('div', ['proj'], [selBtn, editBtn, delBtn]);
+        editBtn.addEventListener('click', () => {
+            selBtn.classList.add('hidden');
+            selInput.classList.remove('hidden');
+            selInput.focus();
+        });
+
+        selBtn.addEventListener('click', () => {
+            selectedProj = proj;
+            Display.renderTodosPanel(proj)
+        });
+
+        selInput.addEventListener('change', () => {
+            proj.title = selInput.value;
+            selBtn.textContent = selInput.value;
+
+            selBtn.classList.remove('hidden');
+            selInput.classList.add('hidden');
+        });
+
+        selInput.addEventListener('focusout', () => {
+            selBtn.classList.remove('hidden');
+            selInput.classList.add('hidden');
+        });
+
+        selInput.addEventListener('keydown', (evt) => {
+            if(evt.key === 'Escape') {
+                selBtn.classList.remove('hidden');
+                selInput.classList.add('hidden');
+            }
+        });
+
+        delBtn.addEventListener('click', () => {
+            console.log(projs);
+            projs.splice(projs.indexOf(selectedProj), 1);
+            selectedProj=null;
+            Display.renderProjectPanel();
+        });
+
+
+        const container = _newElement('div', ['proj'], [selBtn, selInput, editBtn, delBtn]);
 
         return container;
     }
