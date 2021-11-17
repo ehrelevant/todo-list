@@ -1,3 +1,4 @@
+import {format, compareAsc} from 'date-fns'
 
 let projs = [];
 let selectedProj;
@@ -35,7 +36,6 @@ const Project = (title) => {
 
 const MainController = (() => {
     function newTodo(proj, title, date, priority, isDone, desc) {
-        todoList = proj.getTodos();
         const todo = Todo(title, date, priority, isDone, desc);
         proj.addTodo(todo);
 
@@ -98,7 +98,7 @@ const ElementBuilder = (() => {
         const titleInput = _newInput('text', todo.title, ['todo-form-text', 'hidden']);
         titleInput.required;
 
-        const dueDate = _newElement('p', undefined, undefined, (todo.dueDate) ? todo.dueDate : 'No Info');
+        const dueDate = _newElement('p', undefined, undefined, (todo.dueDate) ? format(new Date(todo.dueDate), "PPPP") : 'No Info');
         const dueDateInput = _newInput('date', todo.dueDate, ['todo-form-text', 'hidden']);
 
 
@@ -177,7 +177,11 @@ const ElementBuilder = (() => {
         });
         input.addEventListener('change', () => {
             todo[todoName] = input.value;
-            element.textContent = (input.value) ? input.value : 'No Info';
+            if(todoName === 'dueDate') {
+                element.textContent = (input.value) ? format(new Date(input.value), "PPPP") : 'No Info';
+            } else {
+                element.textContent = (input.value) ? input.value : 'No Info';
+            }
 
             element.classList.remove('hidden');
             input.classList.add('hidden');
@@ -203,7 +207,7 @@ const ElementBuilder = (() => {
 
         selBtn.addEventListener('click', () => {
             selectedProj = proj;
-            Display.renderTodosPanel(proj)
+            Display.renderTodosPanel(proj);
         });
 
         selInput.addEventListener('change', () => {
@@ -360,5 +364,13 @@ todoForm.addEventListener('submit', () => {
 
 
 
-MainController.newProject('Proj 1')
-// MainController.newTodo(selectedProj, 'Todo 1', '00/00/0000', 'High', true, 'Hello World!')
+
+
+
+
+MainController.newProject('Proj 1');
+MainController.newProject('Proj 2');
+MainController.newProject('Proj 3');
+MainController.newTodo(selectedProj, 'Todo 1', undefined, 'High', true, 'Hello World!');
+MainController.newTodo(selectedProj, 'Todo 2', undefined, 'High', true, 'Hello World!');
+MainController.newTodo(selectedProj, 'Todo 3', undefined, 'High', false, 'Hello World!');

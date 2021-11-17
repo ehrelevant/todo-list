@@ -256,6 +256,10 @@ body, input, button, textarea, select {
     background-color: var(--checkbox-secondary);
 }
 
+.selected {
+    background-color: var(--proj-btn-selected);
+    color: var(--text-secondary)
+}
 
 .hidden {
     display: none;
