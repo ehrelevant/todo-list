@@ -20,6 +20,25 @@ const Project = (title) => {
 
     const addTodo = todo => {
         _todos.push(todo);
+        sortByDate();
+    };
+
+    const sortByDate = () => {
+        _todos.sort((a, b) => {
+            if(a.dueDate == undefined && b.dueDate == undefined) {
+                if(a.title > b.title) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            } else if (a.dueDate == undefined) {
+                return 1;
+            } else if (b.dueDate == undefined) {
+                return -1;
+            } else {
+                return compareAsc(new Date(a.dueDate), new Date(b.dueDate));
+            }
+        });
     };
 
     const getTodos = () => _todos;
