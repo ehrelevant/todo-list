@@ -52,7 +52,8 @@ const Project = (title) => {
     };
 
     return {
-        addTodo, updateTodos, getTodos, title, deleteTodo
+        title, addTodo, updateTodos,
+        sortByDate, getTodos,  deleteTodo
     };
 };
 
@@ -192,7 +193,7 @@ const ElementBuilder = (() => {
         return container;
     }
 
-    function _addEditEvent(element, input, proj, todo, todoName) {
+    function _addEditEvent(element, input, todo, todoName) {
         element.addEventListener('dblclick', () => {
             element.classList.add('hidden');
             input.classList.remove('hidden');
