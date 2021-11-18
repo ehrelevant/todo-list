@@ -232,6 +232,7 @@ const ElementBuilder = (() => {
 
         selBtn.addEventListener('click', () => {
             selectedProj = proj;
+            todoOpenBtn.classList.remove('hidden');
             Display.renderTodosPanel(proj);
         });
 
@@ -397,6 +398,8 @@ const monthProj = Project(undefined);
 
 const projAllBtn = document.querySelector('#proj_all');
 projAllBtn.addEventListener('click', () => {
+    todoOpenBtn.classList.add('hidden');
+
     allProj.updateTodos(projs.reduce((allTodos, proj) => {
         return allTodos.concat(proj.getTodos())
     }, []));
@@ -405,6 +408,8 @@ projAllBtn.addEventListener('click', () => {
 
 const projDayBtn = document.querySelector('#proj_day');
 projDayBtn.addEventListener('click', () => {
+    todoOpenBtn.classList.add('hidden');
+
     dayProj.updateTodos(projs.reduce((allTodos, proj) => {
         return allTodos.concat(proj.getTodos());
     }, []).filter(todo => {
@@ -415,6 +420,8 @@ projDayBtn.addEventListener('click', () => {
 
 const projWeekBtn = document.querySelector('#proj_week');
 projWeekBtn.addEventListener('click', () => {
+    todoOpenBtn.classList.add('hidden');
+
     weekProj.updateTodos(projs.reduce((allTodos, proj) => {
         return allTodos.concat(proj.getTodos());
     }, []).filter(todo => {
@@ -425,6 +432,8 @@ projWeekBtn.addEventListener('click', () => {
 
 const projMonthBtn = document.querySelector('#proj_month');
 projMonthBtn.addEventListener('click', () => {
+    todoOpenBtn.classList.add('hidden');
+
     monthProj.updateTodos(projs.reduce((allTodos, proj) => {
         return allTodos.concat(proj.getTodos());
     }, []).filter(todo => {
