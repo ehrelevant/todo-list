@@ -1,4 +1,4 @@
-import {format, compareAsc} from 'date-fns'
+import {format, compareAsc, isToday, isThisWeek, isThisMonth} from 'date-fns'
 
 let projs = [];
 let selectedProj;
@@ -23,20 +23,24 @@ const Project = (title) => {
         sortByDate();
     };
 
+    const updateTodos = todos => {
+        _todos = [];
+        _todos.push(...todos);
+        sortByDate();
+    };
+
     const sortByDate = () => {
         _todos.sort((a, b) => {
-            if(a.dueDate == undefined && b.dueDate == undefined) {
-                if(a.title > b.title) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            } else if (a.dueDate == undefined) {
+            const aDate = a.dueDate;
+            const bDate = b.dueDate;
+            if(!aDate && !bDate){
+                return (aDate > bDate) ? aDate : bDate;
+            } else if(!aDate){
                 return 1;
-            } else if (b.dueDate == undefined) {
+            } else if(!bDate){
                 return -1;
             } else {
-                return compareAsc(new Date(a.dueDate), new Date(b.dueDate));
+                return compareAsc(new Date(aDate), new Date(bDate));
             }
         });
     };
@@ -48,7 +52,7 @@ const Project = (title) => {
     };
 
     return {
-        addTodo, getTodos, title, deleteTodo
+        addTodo, updateTodos, getTodos, title, deleteTodo
     };
 };
 
@@ -188,7 +192,7 @@ const ElementBuilder = (() => {
         return container;
     }
 
-    function _addEditEvent(element, input, todo, todoName) {
+    function _addEditEvent(element, input, proj, todo, todoName) {
         element.addEventListener('dblclick', () => {
             element.classList.add('hidden');
             input.classList.remove('hidden');
@@ -201,6 +205,8 @@ const ElementBuilder = (() => {
             } else {
                 element.textContent = (input.value) ? input.value : 'No Info';
             }
+
+            selectedProj.sortByDate();
 
             element.classList.remove('hidden');
             input.classList.add('hidden');
@@ -379,6 +385,54 @@ todoForm.addEventListener('submit', () => {
 
     todoForm.reset();
 });
+
+
+
+
+const allProj = Project(undefined);
+const dayProj = Project(undefined);
+const weekProj = Project(undefined);
+const monthProj = Project(undefined);
+
+
+const projAllBtn = document.querySelector('#proj_all');
+projAllBtn.addEventListener('click', () => {
+    allProj.updateTodos(projs.reduce((allTodos, proj) => {
+        return allTodos.concat(proj.getTodos())
+    }, []));
+    Display.renderTodosPanel(allProj)
+});
+
+const projDayBtn = document.querySelector('#proj_day');
+projDayBtn.addEventListener('click', () => {
+    dayProj.updateTodos(projs.reduce((allTodos, proj) => {
+        return allTodos.concat(proj.getTodos());
+    }, []).filter(todo => {
+        return isToday(new Date(todo.dueDate))
+    }));
+    Display.renderTodosPanel(dayProj)
+});
+
+const projWeekBtn = document.querySelector('#proj_week');
+projWeekBtn.addEventListener('click', () => {
+    weekProj.updateTodos(projs.reduce((allTodos, proj) => {
+        return allTodos.concat(proj.getTodos());
+    }, []).filter(todo => {
+        return isThisWeek(new Date(todo.dueDate))
+    }));
+    Display.renderTodosPanel(weekProj)
+});
+
+const projMonthBtn = document.querySelector('#proj_month');
+projMonthBtn.addEventListener('click', () => {
+    monthProj.updateTodos(projs.reduce((allTodos, proj) => {
+        return allTodos.concat(proj.getTodos());
+    }, []).filter(todo => {
+        return isThisMonth(new Date(todo.dueDate))
+    }));
+    Display.renderTodosPanel(monthProj)
+});
+
 
 
 
