@@ -29,6 +29,7 @@
 
     --checkbox-main: #fff;
     --checkbox-secondary: #aaa;
+    --checkbox-checked: #10bb74;
 
 
     --input-line-color: #888;
@@ -250,10 +251,12 @@ body, input, button, textarea, select {
     border-right: 3px solid var(--checkbox-secondary);
     border-radius: 50%;
     cursor: pointer;
+
+    transition: background-color 200ms ease-in-out;
 }
 
 .checkbox:checked {
-    background-color: var(--checkbox-secondary);
+    background-color: var(--checkbox-checked);
 }
 
 .selected {
