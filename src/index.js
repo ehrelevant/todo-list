@@ -38,7 +38,7 @@ const Project = (title) => {
             const aDate = a.dueDate;
             const bDate = b.dueDate;
             if(!aDate && !bDate){
-                return (aDate > bDate) ? aDate : bDate;
+                return (a.title >= b.title) ? 1 : -1;
             } else if(!aDate){
                 return 1;
             } else if(!bDate){
