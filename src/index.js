@@ -93,11 +93,13 @@ const Display = (() => {
         todoList.appendChild(todoObj);
     }
 
-    function renderTodosPanel(proj) {
+    function renderTodosPanel(proj=undefined) {
         todoList.textContent = '';
-        proj.getTodos().forEach(todo => {
-            _displayTodo(todo)
-        });
+        if(proj) {
+            proj.getTodos().forEach(todo => {
+                _displayTodo(todo)
+            });
+        }
     }
 
     function _displayProject(proj) {
@@ -262,9 +264,13 @@ const ElementBuilder = (() => {
         });
 
         delBtn.addEventListener('click', () => {
-            projs.splice(projs.indexOf(selectedProj), 1);
-            selectedProj=null;
+            projs.splice(projs.indexOf(proj), 1);
             Display.renderProjectPanel();
+            if(selectedProj == proj) {
+                selectedProj=null;
+                todoOpenBtn.classList.add('hidden');
+                Display.renderTodosPanel();
+            }
         });
 
 
@@ -399,7 +405,7 @@ function defaultProjsSetup() {
     const dayProj = Project(undefined);
     const weekProj = Project(undefined);
     const monthProj = Project(undefined);
-    const todoOpenBtn = document.querySelector('#new_todo');
+    
 
     const projAllBtn = document.querySelector('#proj_all');
     projAllBtn.addEventListener('click', () => {
