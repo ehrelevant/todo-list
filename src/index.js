@@ -3,6 +3,10 @@ import {format, compareAsc, isToday, isThisWeek, isThisMonth} from 'date-fns'
 let projs = [];
 let selectedProj;
 
+const projOpenBtn = document.querySelector('#new_proj');
+const todoOpenBtn = document.querySelector('#new_todo');
+
+
 const Todo = (title, dueDate, priority, isDone, description) => {
     const switchDone = () => {
         rets.isDone = !rets.isDone
@@ -258,7 +262,6 @@ const ElementBuilder = (() => {
         });
 
         delBtn.addEventListener('click', () => {
-            console.log(projs);
             projs.splice(projs.indexOf(selectedProj), 1);
             selectedProj=null;
             Display.renderProjectPanel();
@@ -326,134 +329,136 @@ const ElementBuilder = (() => {
 })();
 
 
-const todoForm = document.forms.todoForm;
-const todoOpenBtn = document.querySelector('#new_todo');
 
-const projForm = document.forms.projForm;
-const projOpenBtn = document.querySelector('#new_proj');
 
-projOpenBtn.addEventListener('click', () => {
-    projOpenBtn.classList.add('hidden');
-    projForm.parentNode.classList.remove('hidden');
-    projForm.children[0].focus();
-});
+function projFormSetup() {
+    const projForm = document.forms.projForm;
 
-projForm.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
+    projOpenBtn.addEventListener('click', () => {
+        projOpenBtn.classList.add('hidden');
+        projForm.parentNode.classList.remove('hidden');
+        projForm.children[0].focus();
+    });
+
+    projForm.addEventListener('keydown', (evt) => {
+        if(evt.key === 'Escape') {
+            projOpenBtn.classList.remove('hidden');
+            projForm.parentNode.classList.add('hidden');
+            projForm.reset();
+        }
+    });
+
+    projForm.addEventListener('submit', () => {
         projOpenBtn.classList.remove('hidden');
         projForm.parentNode.classList.add('hidden');
+
+        MainController.newProject(projForm['title'].value);
+
         projForm.reset();
-    }
-});
+    });
+}
 
-projForm.addEventListener('submit', () => {
-    projOpenBtn.classList.remove('hidden');
-    projForm.parentNode.classList.add('hidden');
+function todoFormSetup() {
+    const todoForm = document.forms.todoForm;
 
-    MainController.newProject(projForm['title'].value);
+    todoOpenBtn.addEventListener('click', () => {
+        todoOpenBtn.classList.add('hidden');
+        todoForm.parentNode.classList.remove('hidden');
+    });
 
-    projForm.reset();
-});
-
-
-todoOpenBtn.addEventListener('click', () => {
-    todoOpenBtn.classList.add('hidden');
-    todoForm.parentNode.classList.remove('hidden');
-});
-
-todoForm.addEventListener('reset', () => {
-    todoOpenBtn.classList.remove('hidden');
-    todoForm.parentNode.classList.add('hidden');
-});
-
-todoForm.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
+    todoForm.addEventListener('reset', () => {
         todoOpenBtn.classList.remove('hidden');
         todoForm.parentNode.classList.add('hidden');
-    }
-});
+    });
 
-todoForm.addEventListener('submit', () => {
-    todoOpenBtn.classList.remove('hidden');
-    todoForm.parentNode.classList.add('hidden');
+    todoForm.addEventListener('keydown', (evt) => {
+        if(evt.key === 'Escape') {
+            todoOpenBtn.classList.remove('hidden');
+            todoForm.parentNode.classList.add('hidden');
+        }
+    });
 
-    MainController.newTodo(selectedProj,
-                           todoForm['title'].value,
-                           todoForm['date'].value,
-                           todoForm['priority'].value,
-                           todoForm['done'].checked,
-                           todoForm['desc'].value,
-                           );
+    todoForm.addEventListener('submit', () => {
+        todoOpenBtn.classList.remove('hidden');
+        todoForm.parentNode.classList.add('hidden');
 
-    todoForm.reset();
-});
+        MainController.newTodo(selectedProj,
+                            todoForm['title'].value,
+                            todoForm['date'].value,
+                            todoForm['priority'].value,
+                            todoForm['done'].checked,
+                            todoForm['desc'].value,
+                            );
 
+        todoForm.reset();
+    });
+}
 
+function defaultProjsSetup() {
+    const allProj = Project(undefined);
+    const dayProj = Project(undefined);
+    const weekProj = Project(undefined);
+    const monthProj = Project(undefined);
+    const todoOpenBtn = document.querySelector('#new_todo');
 
+    const projAllBtn = document.querySelector('#proj_all');
+    projAllBtn.addEventListener('click', () => {
+        todoOpenBtn.classList.add('hidden');
 
-const allProj = Project(undefined);
-const dayProj = Project(undefined);
-const weekProj = Project(undefined);
-const monthProj = Project(undefined);
+        allProj.updateTodos(projs.reduce((allTodos, proj) => {
+            return allTodos.concat(proj.getTodos());
+        }, []));
+        Display.renderTodosPanel(allProj);
+    });
 
+    const projDayBtn = document.querySelector('#proj_day');
+    projDayBtn.addEventListener('click', () => {
+        todoOpenBtn.classList.add('hidden');
 
-const projAllBtn = document.querySelector('#proj_all');
-projAllBtn.addEventListener('click', () => {
-    todoOpenBtn.classList.add('hidden');
+        dayProj.updateTodos(projs.reduce((allTodos, proj) => {
+            return allTodos.concat(proj.getTodos());
+        }, []).filter(todo => {
+            return isToday(new Date(todo.dueDate));
+        }));
+        Display.renderTodosPanel(dayProj);
+    });
 
-    allProj.updateTodos(projs.reduce((allTodos, proj) => {
-        return allTodos.concat(proj.getTodos())
-    }, []));
-    Display.renderTodosPanel(allProj)
-});
+    const projWeekBtn = document.querySelector('#proj_week');
+    projWeekBtn.addEventListener('click', () => {
+        todoOpenBtn.classList.add('hidden');
 
-const projDayBtn = document.querySelector('#proj_day');
-projDayBtn.addEventListener('click', () => {
-    todoOpenBtn.classList.add('hidden');
+        weekProj.updateTodos(projs.reduce((allTodos, proj) => {
+            return allTodos.concat(proj.getTodos());
+        }, []).filter(todo => {
+            return isThisWeek(new Date(todo.dueDate));
+        }));
+        Display.renderTodosPanel(weekProj);
+    });
 
-    dayProj.updateTodos(projs.reduce((allTodos, proj) => {
-        return allTodos.concat(proj.getTodos());
-    }, []).filter(todo => {
-        return isToday(new Date(todo.dueDate))
-    }));
-    Display.renderTodosPanel(dayProj)
-});
+    const projMonthBtn = document.querySelector('#proj_month');
+    projMonthBtn.addEventListener('click', () => {
+        todoOpenBtn.classList.add('hidden');
 
-const projWeekBtn = document.querySelector('#proj_week');
-projWeekBtn.addEventListener('click', () => {
-    todoOpenBtn.classList.add('hidden');
+        monthProj.updateTodos(projs.reduce((allTodos, proj) => {
+            return allTodos.concat(proj.getTodos());
+        }, []).filter(todo => {
+            return isThisMonth(new Date(todo.dueDate));
+        }));
+        Display.renderTodosPanel(monthProj);
+    });
+}
 
-    weekProj.updateTodos(projs.reduce((allTodos, proj) => {
-        return allTodos.concat(proj.getTodos());
-    }, []).filter(todo => {
-        return isThisWeek(new Date(todo.dueDate))
-    }));
-    Display.renderTodosPanel(weekProj)
-});
+function setup() {
+    projFormSetup();
+    todoFormSetup();
+    defaultProjsSetup();
+}
 
-const projMonthBtn = document.querySelector('#proj_month');
-projMonthBtn.addEventListener('click', () => {
-    todoOpenBtn.classList.add('hidden');
-
-    monthProj.updateTodos(projs.reduce((allTodos, proj) => {
-        return allTodos.concat(proj.getTodos());
-    }, []).filter(todo => {
-        return isThisMonth(new Date(todo.dueDate))
-    }));
-    Display.renderTodosPanel(monthProj)
-});
-
-
-
-
-
-
-
-
+setup()
 
 MainController.newProject('Proj 1');
 MainController.newProject('Proj 2');
 MainController.newProject('Proj 3');
-MainController.newTodo(selectedProj, 'Todo 1', undefined, 'High', true, 'Hello World!');
-MainController.newTodo(selectedProj, 'Todo 2', undefined, 'High', true, 'Hello World!');
-MainController.newTodo(selectedProj, 'Todo 3', undefined, 'High', false, 'Hello World!');
+MainController.newTodo(selectedProj, 'Todo 1', '', 'High', true, 'Hello World!');
+MainController.newTodo(selectedProj, 'Todo 2', '', 'High', true, 'Hello World!');
+MainController.newTodo(selectedProj, 'Todo 3', '', 'High', false, 'Hello World!');
