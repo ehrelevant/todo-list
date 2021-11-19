@@ -86,10 +86,11 @@ body, input, button, textarea, select {
 
 .proj-form-text {
     box-sizing: border-box;
-    width: 100%;
+    width: auto;
     height: 24px;
     align-self: center;
 
+    margin: 0 15px;
     outline: none;
     border: none;
     background-color: unset;
@@ -174,7 +175,7 @@ body, input, button, textarea, select {
     gap: 1%;
 
     align-items: center;
-    height: 50px;
+    min-height: 50px;
     padding: 0 4%;
 }
 
@@ -273,4 +274,15 @@ body, input, button, textarea, select {
 
 .hidden {
     display: none;
+}
+
+
+@media only screen and (max-width: 900px) {
+    .content {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+
+        height: 100vh;
+    }
 }
