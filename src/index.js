@@ -8,6 +8,8 @@ const todoOpenBtn = document.querySelector('#new_todo');
 const projForm = document.forms.projForm;
 const todoForm = document.forms.todoForm;
 
+const projHeader = document.querySelector('#proj_header')
+
 
 const Todo = (title, dueDate, priority, isDone, description) => {
     const switchDone = () => {
@@ -244,6 +246,7 @@ const ElementBuilder = (() => {
 
         selBtn.addEventListener('click', () => {
             selectedProj = proj;
+            projHeader.textContent = proj.title;
             todoOpenBtn.classList.remove('hidden');
             todoForm.parentNode.classList.add('hidden');
             Display.renderTodosPanel(proj);
@@ -410,6 +413,7 @@ function defaultProjsSetup() {
 
     const projAllBtn = document.querySelector('#proj_all');
     projAllBtn.addEventListener('click', () => {
+        projHeader.textContent = "All";
         todoOpenBtn.classList.add('hidden');
         todoForm.parentNode.classList.add('hidden');
 
@@ -421,6 +425,7 @@ function defaultProjsSetup() {
 
     const projDayBtn = document.querySelector('#proj_day');
     projDayBtn.addEventListener('click', () => {
+        projHeader.textContent = "Today";
         todoOpenBtn.classList.add('hidden');
         todoForm.parentNode.classList.add('hidden');
 
@@ -434,6 +439,7 @@ function defaultProjsSetup() {
 
     const projWeekBtn = document.querySelector('#proj_week');
     projWeekBtn.addEventListener('click', () => {
+        projHeader.textContent = "Week";
         todoOpenBtn.classList.add('hidden');
         todoForm.parentNode.classList.add('hidden');
 
@@ -447,6 +453,7 @@ function defaultProjsSetup() {
 
     const projMonthBtn = document.querySelector('#proj_month');
     projMonthBtn.addEventListener('click', () => {
+        projHeader.textContent = "Month";
         todoOpenBtn.classList.add('hidden');
         todoForm.parentNode.classList.add('hidden');
 

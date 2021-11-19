@@ -1,7 +1,7 @@
 :root {
     --default-font:  Ubuntu, monospace, Arial;
     --default-font-size: 16px;
-    --btn-font-size: 12px;
+    --btn-font-size: 16px;
 
 
     /* Color Presets */
@@ -110,10 +110,11 @@ body, input, button, textarea, select {
 
 .sel-btn, .def-btn, .proj-new-btn {
     text-align: left;
-    padding: 0 5%;
+    padding: 0 15px;
 
     border-radius: 12px;
     background-color: var(--proj-btn);
+    font-size: var(--btn-font-size);
     transition: background-color 50ms;
 }
 
@@ -139,6 +140,11 @@ body, input, button, textarea, select {
 
     display: flex;
     flex-direction: column;
+}
+
+.proj-header {
+    font-size: 32px;
+    text-decoration: underline;
 }
 
 .todo-list {
@@ -199,6 +205,7 @@ body, input, button, textarea, select {
     border: none;
 
     cursor: pointer;
+    font-size: var(--btn-font-size);
 }
 
 .todo-new-btn {
