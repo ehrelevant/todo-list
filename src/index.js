@@ -21,22 +21,20 @@ const Todo = (title, dueDate, priority, isDone, description) => {
     return rets;
 };
 
-const Project = (title) => {
-    let _todos = [];
-
+const Project = (title, todos = []) => {
     const addTodo = todo => {
-        _todos.push(todo);
+        rets.todos.push(todo);
         sortByDate();
     };
 
-    const updateTodos = todos => {
-        _todos = [];
-        _todos.push(...todos);
+    const updateTodos = newTodos => {
+        rets.todos = [];
+        rets.todos.push(...newTodos);
         sortByDate();
     };
 
     const sortByDate = () => {
-        _todos.sort((a, b) => {
+        rets.todos.sort((a, b) => {
             const aDate = a.dueDate;
             const bDate = b.dueDate;
             if(!aDate && !bDate){
@@ -51,16 +49,17 @@ const Project = (title) => {
         });
     };
 
-    const getTodos = () => _todos;
+    const getTodos = () => rets.todos;
 
-    const deleteTodo = (todo) => {
-        _todos.splice(_todos.indexOf(todo), 1);
+    const deleteTodo = todo => {
+        rets.todos.splice(todos.indexOf(todo), 1);
     };
 
-    return {
-        title, addTodo, updateTodos,
+    const rets = {
+        title, todos, addTodo, updateTodos,
         sortByDate, getTodos,  deleteTodo
     };
+    return rets;
 };
 
 
@@ -101,6 +100,8 @@ const Display = (() => {
             proj.getTodos().forEach(todo => {
                 _displayTodo(todo)
             });
+
+            saveProjects();
         }
     }
 
@@ -114,6 +115,8 @@ const Display = (() => {
         projs.forEach(proj => {
             _displayProject(proj)
         });
+
+        saveProjects();
     }
 
     return {
@@ -456,17 +459,90 @@ function defaultProjsSetup() {
     });
 }
 
+
+// LocalStorage Functions
+function setupStorage() {
+    if (storageAvailable('localStorage')) {
+        if (localStorage.getItem('savedProjects')) {
+            getSavedProjects();
+        } else {
+            saveProjects();
+        }
+    }
+}
+
+function storageAvailable(type) {
+    var storage;
+    try {
+        storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+
+function saveProjects() {
+    localStorage.setItem('savedProjects', JSON.stringify(projs));
+}
+
+function getSavedProjects() {
+    const projsStr = localStorage.getItem('savedProjects');
+    const projsRaw = JSON.parse(projsStr);
+    projs = projsRaw.map((projRaw)=>{
+        const proj = Project(projRaw.title);
+        const todosRaw = projRaw.todos;
+
+        const todos = todosRaw.map(todoRaw => {
+            const title = todoRaw.title;
+            const dueDate = todoRaw.dueDate;
+            const priority = todoRaw.priority;
+            const isDone = todoRaw.isDone;
+            const desc = todoRaw.description;
+
+            return Todo(title, dueDate, priority, isDone, desc);
+        });
+
+        proj.updateTodos(todos);
+        return proj;
+    });
+
+    Display.renderProjectPanel();
+}
+
+
+
+
 function setup() {
     projFormSetup();
     todoFormSetup();
     defaultProjsSetup();
+    setupStorage();
 }
 
 setup()
 
-MainController.newProject('Proj 1');
-MainController.newProject('Proj 2');
-MainController.newProject('Proj 3');
-MainController.newTodo(selectedProj, 'Todo 1', '', 'High', true, 'Hello World!');
-MainController.newTodo(selectedProj, 'Todo 2', '', 'High', true, 'Hello World!');
-MainController.newTodo(selectedProj, 'Todo 3', '', 'High', false, 'Hello World!');
+
+
+
+
+
+
+
+
+
+
