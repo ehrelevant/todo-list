@@ -13,4 +13,4 @@ While working on this project I...
 * Learned to use the "date-fns" package for handling dates
 * Relearned to use localstorage to store project data
 
-[Live Demo](https://kindaexists.github.io/todo-list/)
+[Live Demo](https://ehrelevant.github.io/todo-list/)
